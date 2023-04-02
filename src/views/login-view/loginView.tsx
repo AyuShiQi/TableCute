@@ -1,4 +1,7 @@
 import { defineComponent } from "vue"
+import './login-view.less'
+
+import LoginCard from "./childComps/loginCard"
 
 export default defineComponent({
   name: 'LoginView',
@@ -6,9 +9,8 @@ export default defineComponent({
     const name = 'ysq'
 
     return () => (
-      <div class="ok">
-        login view
-        <div>{name}</div>
+      <div class="login-view">
+        <LoginCard></LoginCard>
       </div>
     )
   }

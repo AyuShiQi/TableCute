@@ -1,15 +1,13 @@
-import { defineComponent } from 'vue'
-import './App.less'
+import { defineComponent, KeepAlive } from 'vue'
 
 export default defineComponent({
   name: 'App',
   setup(props, ctx) {
     return () => (
-      <div id="app">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </div>
+      <router-view>
+        {/* <keep-alive>
+        </keep-alive> */}
+      </router-view>
     )
   },
 })
