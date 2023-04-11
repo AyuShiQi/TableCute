@@ -17,13 +17,13 @@ export default defineComponent({
                 <div class="login-card__right__nav__option_right"></div>
             </h1>
             <div class="login-card__right__input">
-              <vi-input class="login-card__right__input__item" type="plain" dark width="80%">手机号</vi-input>
-              <vi-input class="login-card__right__input__item" type="plain" dark width="80%">密码</vi-input>
+              <vi-input class="login-card__right__input__item" type="plain" color="purple" placeholder="手机号"></vi-input>
+              <vi-input class="login-card__right__input__item" type="plain" color="purple" placeholder="密码"></vi-input>
             </div>
             <div class="login-card__right__change-link">
               <a href="javascript:;">切换为账户密码登录</a>
             </div>
-            <vi-button color="spurple" class="login-card__right__submit-btn">登录</vi-button>
+            <vi-button color="purple" class="login-card__right__submit-btn" size="middle">登录</vi-button>
             <div class="login-card__right__attention">
               <vi-radio color="dark" size="small">我已阅读<a href="jacascript;:">注意事项</a>并同意所有条例</vi-radio>
             </div>
