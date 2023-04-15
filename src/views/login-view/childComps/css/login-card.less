@@ -6,6 +6,7 @@
     width: 60rem;
     height: 32rem;
     padding: 1rem;
+    background-color: #fff;
     border-radius: @border-radius-big;
     box-shadow: @box-shadow;
     box-sizing: border-box;
@@ -49,7 +50,9 @@
             .verify {
                 margin-top: 1rem;
                 .login-card__right__input {
-                    width: 13rem;
+                    flex: 1;
+                    width: 1rem;
+                    margin-right: 1rem;
                     margin-top: 0;
                 }
             }
@@ -110,13 +113,47 @@
 // 笔记本电脑与平板电脑适配
 
 // 手机适配
-@media screen and (max-width: 670px) {
+@media screen and (max-width: 655px) {
     .login-card {
+        width: 100%;
+        height: auto;
         .login-card__left {
             display: none;
         }
         .login-card__right {
             width: 100%;
+            .login-card__right__login {
+                width: 100%;    
+                .login-card__right__input {
+                    margin-top: 3rem;
+                }
+    
+                .verify {
+                    margin-top: 1rem;
+                }
+    
+                .login-card__right__change-link {
+                    margin-top: .6rem;
+                }
+    
+                .login-card__right__submit-btn {
+                    margin-top: 1.4rem;
+                }
+    
+                .login-card__right__attention {
+                    margin-top: .6rem;
+                }
+    
+                .login-card__right__else-login {
+                    margin-top: 8.4rem;
+                    .login-card__right__else-login__link {
+                        margin-top: 1.6rem;
+                        .login-card__right__else-login__link__icon {
+                            width: 2.6rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
