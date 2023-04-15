@@ -1,181 +1,21 @@
 @import '../../../../assets/css/base.less';
 
 .login-card {
-    overflow: hidden;
     display: flex;
-    width: 80vw;
-    height: 100vw;
+    position: relative;
+    width: 60rem;
+    height: 32rem;
     border-radius: @boreder-radius-big;
     box-shadow: @box-shadow;
     .login-card__left {
-        display: none;
+        
     }
     .login-card__right {
-        display: flex;
-        width: 100%;
-        padding: 1rem;
-        flex-direction: column;
-        align-items: center;
-        justify-self: center;
-        .login-card__right__nav {
-            position: relative;
-            display: flex;
-            width: 6rem;
-            font-size: @main-nav-size;
-            span {
-                padding: 0em .5rem .5rem .5rem;
-                user-select: none;
-                cursor: default;
-            }
-            [class^=login-card__right__nav__option] {
-                position: absolute;
-                bottom: 0;
-                width: 2em;
-                height: 2px;
-                background-color: #bd3fb4;
-            }
-            .login-card__right__nav__option_left {
-                left: .5em;
-            }
-            .login-card__right__nav__option_right {
-                left: 3.5em;
-            }
-        }
-        .login-card__right__input {
-            width: 100%;
-            padding: 1em 0;
-            text-align: center;
-            flex: 1;
-
-            .login-card__right__input__item {
-                --vi-input-width: 100%;
-                margin: 1em 0;
-            }
-        }
-        .login-card__right__submit-btn {
-            width: 100%;
-            font-size: @main-nav-size;
-        }
-        .login-card__right__attention {
-            
-        }
-        .login-card__right__else-login {
-            width: 100%;
-            padding: 1vw 0 0 0;
-            .login-card__right__else-login__title {
-                display: flex;
-                width: 100%;
-                font-size: @text-size;
-                justify-content: space-between;
-                align-items: center;
-                user-select: none;
-                .login-card__right__else-login__text {
-                    padding: 0 1em;
-                    color: @icon-color-light;
-                }
-                .login-card__right__else-login__line {
-                    display: inline-block;
-                    height: 0;
-                    border-top: 1px solid @background-color-dark;
-                    flex: 1;
-                }
-            }
-            .login-card__right__else-login__link {
-                display: flex;
-                padding: 1.5rem 0;
-                justify-content: center;
-                align-items: center;
-                .login-card__right__else-login__link__icon {
-                    width: 2.5rem;
-                    cursor: pointer;
-                    path {
-                        transition: all .2s ease 0s;
-                        fill: @background-color-dark;
-                    }
-                    &:hover {
-                        path {
-                            fill: #28c445
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
 // 笔记本电脑与平板电脑适配
-@media screen and (min-width: 726px) {
-    .login-card {
-        width: 60rem;
-        height: 32rem;
-        .login-card__left {
-            display: block;
-            width: 36rem;
-            background: url(../../../../assets/imgs/login-img.png) center no-repeat;
-            background-size: 100% 100%;
-        }
-        .login-card__right {
-            width: 24rem;
-            .login-card__right__nav {
-                position: relative;
-                display: flex;
-                width: 6em;
-                font-size: @main-nav-size;
-                span {
-                    padding: 0em .5em .5em .5em;
-                }
-                [class^=login-card__right__nav__option] {
-                    position: absolute;
-                    bottom: 0;
-                    width: 2em;
-                    height: 2px;
-                    background-color: #bd3fb4;
-                }
-                .login-card__right__nav__option_left {
-                    left: .5em;
-                }
-                .login-card__right__nav__option_right {
-                    left: 3.5em;
-                }
-            }
-            // .login-card__right__input {
-            //     width: 100%;
-            //     padding: 1em 0;
-            //     text-align: center;
-            //     flex: 1;
 
-            //     .login-card__right__input__item {
-            //         width: 100%;
-            //         margin: 1em 0;
-            //     }
-            // }
-            // .login-card__right__submit-btn {
-            //     width: 80%;
-            //     font-size: @main-nav-size;
-            // }
-            .login-card__right__else-login {
-                width: 100%;
-                padding: 1vw 0 0 0;
-                .login-card__right__else-login__title {
-                    display: flex;
-                    width: 100%;
-                    font-size: @text-size;
-                    justify-content: space-between;
-                    align-items: center;
-                    // .login-card__right__else-login__text {
-                    //     padding: 0 1em;
-                    //     color: @background-color-dark;
-                    // }
-                    // .login-card__right__else-login__line {
-                    //     display: inline-block;
-                    //     height: 0;
-                    //     border-top: 1px solid @background-color-dark;
-                    //     flex: 1;
-                    // }
-                }
-                .login-card__right__else-login__link {
-                }
-            }
-        }
-    }
+// 手机适配
+@media screen and (max-width: 726px) {
 }
