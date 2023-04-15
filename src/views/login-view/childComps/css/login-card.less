@@ -1,16 +1,109 @@
 @import '../../../../assets/css/base.less';
 
 .login-card {
+    overflow: hidden;
     display: flex;
-    position: relative;
     width: 60rem;
     height: 32rem;
-    border-radius: @boreder-radius-big;
+    padding: 1rem;
+    border-radius: @border-radius-big;
     box-shadow: @box-shadow;
+    box-sizing: border-box;
     .login-card__left {
-        
+        position: relative;
+        width: 33rem;
+        .login-card_left_background {
+            width: 20rem;
+            height: 100%;
+            border-radius: @border-radius-big;
+            background: linear-gradient(to bottom, #4c67af, #b287be);
+        }
+        .login-card_left_img {
+            position: absolute;
+            top: calc(50% - 13.4rem);
+            left: -2rem;
+        }
     }
     .login-card__right {
+        flex: 1;
+        .login-card__right__register-link {
+            text-align: right;
+        }
+        .login-card__right__title {
+            h1 {
+                line-height: 1rem;
+                font-weight: 400;
+            }
+        }
+        .login-card__right__login {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 22rem;
+
+            .login-card__right__input {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .verify {
+                margin-top: 1rem;
+                .login-card__right__input {
+                    width: 13rem;
+                    margin-top: 0;
+                }
+            }
+
+            .login-card__right__change-link {
+                margin-top: .6rem;
+                text-align: right;
+                .vi-link {
+                  margin-left: .2rem;
+                }
+            }
+
+            .login-card__right__submit-btn {
+                margin-top: 1.4rem;
+                width: 100%;
+            }
+
+            .login-card__right__attention {
+                margin-top: .6rem;
+                text-align: center;
+            }
+
+            .login-card__right__else-login {
+                margin-top: 1.4rem;
+                .login-card__right__else-login__title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .login-card__right__else-login__line {
+                        display: inline-block;
+                        flex: 1;
+                        height: 1px;
+                        background-color: @background-color-dark;
+                    }
+                    .login-card__right__else-login__text {
+                        padding: 0 1rem;
+                        color: @icon-color-light;
+                    }
+                }
+                .login-card__right__else-login__link {
+                    margin-top: 1.6rem;
+                    text-align: center;
+                    .login-card__right__else-login__link__icon {
+                        width: 2.6rem;
+                        fill: @background-color-dark;
+                        cursor: pointer;
+                        transition: all .2s ease 0s;
+                        &:hover {
+                            fill: #28c445
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
