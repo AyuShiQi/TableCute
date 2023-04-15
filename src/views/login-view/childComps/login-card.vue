@@ -1,13 +1,5 @@
-import { defineComponent } from "vue"
-import LoginImg from './login-img.vue'
-import './css/login-card.less'
-
-
-export default defineComponent({
-  name: 'LoginCard',
-  setup(props, context) {
-    return () => (
-      <div class="login-card">
+<template>
+    <div class="login-card">
         <div class="login-card__left">
           <div class="login-card_left_background"></div>
           <LoginImg class="login-card_left_img"></LoginImg>
@@ -24,30 +16,40 @@ export default defineComponent({
             <div class="login-card__right__login">
               <vi-input
               class="login-card__right__input"
-              maxlength={11}
-              number
+              :maxlength="11"
+              :number="tel"
               type="plain"
               color="purple"
-              placeholder="请输入手机号"></vi-input>
-              <vi-row justify="space-between" class="verify">
+              :placeholder="tel? '请输入手机号' : '请输入账号/手机号'"></vi-input>
+              <vi-row justify="space-between" class="verify" v-show="tel">
                 <vi-input
                 class="login-card__right__input"
-                maxlength={6}
+                :maxlength="6"
                 number
                 type="plain"
                 color="purple"
                 placeholder="请输入验证码"></vi-input>
                 <vi-button type="plain">获取验证码</vi-button>
               </vi-row>
+              <vi-input
+                v-show="!tel"
+                class="login-card__right__input"
+                :maxlength="18"
+                :minlength="9"
+                password
+                show-password
+                type="plain"
+                color="purple"
+                placeholder="请输入密码"></vi-input>
               <div class="login-card__right__change-link">
-                <vi-link>切换为账户登录</vi-link>
-                {/* <vi-link color="purple">忘记密码</vi-link> */}
+                <vi-link color="green" v-show="!tel">忘记密码</vi-link>
+                <vi-link @click="changeLoginMethod">{{tel? '账户密码登录' : '手机验证码登录'}}</vi-link>
               </div>
               <vi-button color="purple" class="login-card__right__submit-btn" size="middle">登录</vi-button>
               <div class="login-card__right__attention">
-                <vi-radio color="dark" size="small">
+                <vi-radio size="small" v-model="believe" :value="true" name="belive">
                   我已阅读
-                  <vi-link color="purple">《注意事项》</vi-link>
+                  <vi-link color="green">《注意事项》</vi-link>
                   并同意所有条例
                 </vi-radio>
               </div>
@@ -67,6 +69,20 @@ export default defineComponent({
             </div>
         </div>
       </div>
-    )
+</template>
+
+<script lang="ts" setup>
+  import { ref } from "vue"
+  import LoginImg from "./login-img.vue"
+
+  const believe = ref(false)
+  const tel = ref(true)
+
+  function changeLoginMethod() {
+    tel.value = !tel.value
   }
-})
+</script>
+
+<style lang="less">
+  @import './css/login-card.less';
+</style>
