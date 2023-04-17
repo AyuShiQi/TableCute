@@ -25,13 +25,18 @@
             left: -2rem;
         }
     }
+
     .login-card__right {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .login-card__right__register-link {
             text-align: right;
         }
         .login-card__right__title {
             h1 {
+                font-size: 2rem;
                 line-height: 1rem;
                 font-weight: 400;
             }
@@ -74,35 +79,35 @@
                 margin-top: .6rem;
                 text-align: center;
             }
+        }
 
-            .login-card__right__else-login {
-                margin-top: 1.4rem;
-                .login-card__right__else-login__title {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    .login-card__right__else-login__line {
-                        display: inline-block;
-                        flex: 1;
-                        height: 1px;
-                        background-color: @background-color-dark;
-                    }
-                    .login-card__right__else-login__text {
-                        padding: 0 1rem;
-                        color: @icon-color-light;
-                    }
+        .login-card__right__else-login {
+            width: 22rem;
+            .login-card__right__else-login__title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .login-card__right__else-login__line {
+                    display: inline-block;
+                    flex: 1;
+                    height: 1px;
+                    background-color: @background-color-dark;
                 }
-                .login-card__right__else-login__link {
-                    margin-top: 1.6rem;
-                    text-align: center;
-                    .login-card__right__else-login__link__icon {
-                        width: 2.6rem;
-                        fill: @background-color-dark;
-                        cursor: pointer;
-                        transition: all .2s ease 0s;
-                        &:hover {
-                            fill: #28c445
-                        }
+                .login-card__right__else-login__text {
+                    padding: 0 1rem;
+                    color: @icon-color-light;
+                }
+            }
+            .login-card__right__else-login__link {
+                margin-top: 1.6rem;
+                text-align: center;
+                .login-card__right__else-login__link__icon {
+                    width: 2.6rem;
+                    fill: @background-color-dark;
+                    cursor: pointer;
+                    transition: all .2s ease 0s;
+                    &:hover {
+                        fill: #28c445
                     }
                 }
             }
@@ -116,20 +121,32 @@
 @media screen and (max-width: 655px) {
     .login-card {
         width: 100%;
-        height: auto;
+        height: 100vh;
+        box-shadow: none;
         .login-card__left {
             display: none;
         }
         .login-card__right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 100%;
+
+            .login-card__right__title {
+                h1 {
+                    padding-top: 1rem;
+                    font-size: 2.5rem;
+                }
+            }
+
             .login-card__right__login {
                 width: 100%;    
                 .login-card__right__input {
-                    margin-top: 3rem;
+                    margin-top: 2rem;
                 }
     
                 .verify {
-                    margin-top: 1rem;
+                    margin-top: 2rem;
                 }
     
                 .login-card__right__change-link {
@@ -143,14 +160,15 @@
                 .login-card__right__attention {
                     margin-top: .6rem;
                 }
-    
-                .login-card__right__else-login {
-                    margin-top: 8.4rem;
-                    .login-card__right__else-login__link {
-                        margin-top: 1.6rem;
-                        .login-card__right__else-login__link__icon {
-                            width: 2.6rem;
-                        }
+            }
+            .login-card__right__else-login {
+                width: 100%;
+                .login-card__right__else-login__link {
+                    margin-top: 2.6rem;
+                    margin-bottom: 2rem;
+                    .login-card__right__else-login__link__icon {
+                        width: 3.6rem;
+                        fill: #28c445;
                     }
                 }
             }
