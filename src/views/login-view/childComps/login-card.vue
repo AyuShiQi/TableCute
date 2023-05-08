@@ -15,13 +15,16 @@
                 <h1>欢迎登录图酷</h1>
               </div>
               <div class="login-card__right__login">
+                <!-- 手机验证码 -->
                 <vi-input
+                v-show="tel"
                 class="login-card__right__input"
                 :maxlength="11"
                 :number="tel"
                 type="plain"
                 color="purple"
-                :placeholder="tel? '请输入手机号' : '请输入账号/手机号'"></vi-input>
+                :prefix="['+86']"
+                placeholder="请输入手机号"></vi-input>
                 <vi-row justify="space-between" class="verify" v-show="tel">
                   <vi-input
                   class="login-card__right__input"
@@ -32,6 +35,14 @@
                   placeholder="请输入验证码"></vi-input>
                   <vi-button type="plain">获取验证码</vi-button>
                 </vi-row>
+                <!-- 账号密码 -->
+                <vi-input
+                v-show="!tel"
+                class="login-card__right__input"
+                :maxlength="16"
+                type="plain"
+                color="purple"
+                placeholder="请输入账号"></vi-input>
                 <vi-input
                   v-show="!tel"
                   class="login-card__right__input"
@@ -79,10 +90,11 @@
   import { ViToast } from "viog-ui"
 
   const believe = ref(false)
-  const tel = ref(true)
+  const tel = ref(false)
 
   function changeLoginMethod() {
-    tel.value = !tel.value
+    ViToast.open('手机验证码登录将在后续版本上线，敬请期待~')
+    // tel.value = !tel.value
   }
 
   function gotoWeChat() {
