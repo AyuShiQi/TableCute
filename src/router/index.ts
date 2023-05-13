@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import homeView from '../views/home-view/homeView'
 
+
+const homeView  = () => import('../views/home-view/homeView.vue')
 const loginView = () => import('../views/login-view/loginView')
+
+const newProjectView = () => import('../views/home-view/homeView.vue')
 
 export default createRouter({
   history: createWebHistory(),
@@ -12,7 +15,13 @@ export default createRouter({
     },
     {
       path: '/home',
-      component: homeView
+      component: homeView,
+      children: [
+        {
+          path: '/home/new-project',
+          component: newProjectView
+        }
+      ]
     },
     {
       path: '/login',
