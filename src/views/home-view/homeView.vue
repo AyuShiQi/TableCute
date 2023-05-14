@@ -16,8 +16,8 @@
       </div>
     </vi-header>
     <div class="home-content">
-      <vi-menu :defaultId="1">
-      <vi-menu-item>
+      <vi-menu :defaultId="1" router>
+      <vi-menu-item to="/login">
         <template v-slot:prefix>
           <vi-icon type="tianjia"></vi-icon>
         </template>
@@ -31,7 +31,7 @@
       </vi-menu-group>
       <vi-divider></vi-divider>
       <vi-menu-group title="模板中心">
-        <vi-menu-item>模板搜索</vi-menu-item>
+        <vi-menu-item>发现模板</vi-menu-item>
         <vi-menu-item>我的收藏</vi-menu-item>
         <vi-menu-item>我的分享</vi-menu-item>
       </vi-menu-group>
@@ -46,12 +46,17 @@
       <div class="home-content__main-content">
         <!-- <router-view></router-view> -->
         <h1>图标类型</h1>
+        <vi-button @click="toLogin">点击跳转</vi-button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import router from '../../router';
+  function toLogin() {
+    router.push('/login')
+  }
 </script>
 
 <style lang="less">
