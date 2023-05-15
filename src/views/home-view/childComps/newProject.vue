@@ -3,6 +3,7 @@
   <div class="new-project-content">
     <barCard></barCard>
     <pieCard></pieCard>
+    <lineCard></lineCard>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import { } from 'vue';
 import barCard from '../../../components/content/barCard.vue'
 import pieCard from '../../../components/content/pieCard.vue';
+import lineCard from '../../../components/content/lineCard.vue';
 
 </script>
 
