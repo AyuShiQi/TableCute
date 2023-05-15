@@ -2,12 +2,14 @@
   <h4>图表类型</h4>
   <div class="new-project-content">
     <barCard></barCard>
+    <pieCard></pieCard>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { } from 'vue';
 import barCard from '../../../components/content/barCard.vue'
+import pieCard from '../../../components/content/pieCard.vue';
 
 </script>
 
