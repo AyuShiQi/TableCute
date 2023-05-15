@@ -4,11 +4,11 @@
       <vi-link class="home-header__logo" href="javascript:;">
         <img src="../../../public/logo.png" alt="logo">
       </vi-link>
-      <div class="home-header_right">
-        <vi-nav class="home-header_nav">
-          <span class="home-header-nav-item">首页</span>
-          <span class="home-header-nav-item">交流社区</span>
-          <span class="home-header-nav-item">模板中心</span>
+      <div class="home-header__right">
+        <vi-nav class="home-header__nav" trigger="hover">
+          <vi-link class="home-header__nav-item" href="javascript:;">首页</vi-link>
+          <vi-link class="home-header__nav-item" href="javascript:;">交流社区</vi-link>
+          <vi-link class="home-header__nav-item" href="javascript:;">模板中心</vi-link>
         </vi-nav>
         <vi-avater>
           <vi-icon type="wode"></vi-icon>
@@ -17,7 +17,7 @@
     </vi-header>
     <div class="home-content">
       <vi-menu :defaultId="1" router>
-      <vi-menu-item to="/login">
+      <vi-menu-item to="/home/new-project">
         <template v-slot:prefix>
           <vi-icon type="tianjia"></vi-icon>
         </template>
@@ -44,9 +44,7 @@
       </vi-menu-item>
       </vi-menu>
       <div class="home-content__main-content">
-        <!-- <router-view></router-view> -->
-        <h1>图标类型</h1>
-        <vi-button @click="toLogin">点击跳转</vi-button>
+        <router-view></router-view>
       </div>
     </div>
   </div>

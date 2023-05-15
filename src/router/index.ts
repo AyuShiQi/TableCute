@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// home
 const homeView  = () => import('../views/home-view/homeView.vue')
-const loginView = () => import('../views/login-view/loginView')
+const newProjectView = () => import('../views/home-view/childComps/newProject.vue')
 
-const newProjectView = () => import('../views/home-view/homeView.vue')
+
+const loginView = () => import('../views/login-view/loginView')
 
 export default createRouter({
   history: createWebHistory(),
