@@ -36,7 +36,7 @@
         <vi-menu-item>我的分享</vi-menu-item>
       </vi-menu-group>
       <vi-divider></vi-divider>
-      <vi-menu-item>
+      <vi-menu-item to="/login">
         <template v-slot:prefix>
           <vi-icon type="shezhi"></vi-icon>
         </template>
