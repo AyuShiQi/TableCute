@@ -4,6 +4,7 @@
     <barCard></barCard>
     <pieCard></pieCard>
     <lineCard></lineCard>
+    <scatterCard></scatterCard>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import { } from 'vue';
 import barCard from '../../../components/content/barCard.vue'
 import pieCard from '../../../components/content/pieCard.vue';
 import lineCard from '../../../components/content/lineCard.vue';
+import scatterCard from '../../../components/content/scatterCard.vue';
 
 </script>
 

@@ -1,0 +1,92 @@
+.type-card.scatter-card {
+    --type-card-color1: #7798FD; 
+    --type-card-color2: #B6CBED;
+    &:hover {
+        .scatter {
+            circle:nth-of-type(1),
+            circle:nth-of-type(2),
+            circle:nth-of-type(3),
+            circle:nth-of-type(4) {
+                animation: s1 .4s ease 0s 1;
+            }
+
+            circle:nth-of-type(5),
+            circle:nth-of-type(6),
+            circle:nth-of-type(7),
+            circle:nth-of-type(8) {
+                animation: s2 .4s ease 0s 1;
+            }
+
+            circle:nth-of-type(9),
+            circle:nth-of-type(10),
+            circle:nth-of-type(11),
+            circle:nth-of-type(12) {
+                animation: s3 .4s ease 0s 1;
+            }
+
+            circle:nth-of-type(13),
+            circle:nth-of-type(14),
+            circle:nth-of-type(15),
+            circle:nth-of-type(16),
+            circle:nth-of-type(17) {
+                animation: s4 .4s ease 0s 1;
+            }
+        }
+    }
+}
+
+@keyframes s1 {
+    0% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes s2 {
+    0% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes s3 {
+    0% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes s4 {
+    0% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    75% {
+        transform: translateY(4px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
