@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite  --open",
+    "dev": "vite  --host --open",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "viog-ui": "^0.5.1",
+    "viog-ui": "^0.6.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },

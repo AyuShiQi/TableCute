@@ -12,7 +12,7 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home/new-project'
     },
     {
       path: '/home',

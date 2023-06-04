@@ -61,7 +61,7 @@
                 <div class="login-card__right__attention">
                   <vi-radio size="small" v-model="believe" :value="true" name="belive">
                     我已阅读
-                    <vi-link color="green">《注意事项》</vi-link>
+                    <vi-link color="green" size="small">《注意事项》</vi-link>
                     并同意所有条例
                   </vi-radio>
                 </div>
