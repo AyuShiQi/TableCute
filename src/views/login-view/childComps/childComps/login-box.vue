@@ -43,14 +43,13 @@
       <vi-link color="green" v-show="!tel">忘记密码</vi-link>
       <vi-link @click="changeLoginMethod">{{tel? '账户密码登录' : '手机验证码登录'}}</vi-link>
     </div>
-    <vi-button color="purple" class="login-card__right__submit-btn" size="middle" @click="toRegister">登录</vi-button>
+    <vi-button color="purple" class="login-card__right__submit-btn" size="middle">登录</vi-button>
   </div>
 </template>
 
 <script lang="ts" setup>
   import { ref } from "vue"
   import { ViToast } from "viog-ui"
-  import { toRegister } from '../../../../network/register'
   const believe = ref(false)
   const tel = ref(false)
 

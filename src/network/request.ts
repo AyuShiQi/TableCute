@@ -4,7 +4,7 @@ import type { AxiosRequestConfig } from 'axios'
 export const request = (config: AxiosRequestConfig) => {
     // 1.创建axios实例
     const instance = axios.create({
-        baseURL: 'http://182.43.52.124:7137',
+        baseURL: '/',
         timeout: 5000
     })
 

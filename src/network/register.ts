@@ -1,10 +1,12 @@
 import { request } from './request'
 
-export const toRegister = () => {
+export const toRegister = (username: string, password: string) => {
   return request({
     url: '/register',
-    method: 'post'
-  }).then(val => {
-    console.log(val)
-  })
+    method: 'post',
+    params: {
+      username,
+      password
+    }
+  }).then(val => val)
 }
