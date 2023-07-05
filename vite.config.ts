@@ -19,10 +19,12 @@ export default defineConfig({
   server: {
     // 跨域配置
     proxy: {
-      '/register': {
-          target: 'http://182.43.52.124:7137',
-          changeOrigin: true
-      }
+      '/user': {
+        target: 'http://182.43.52.124:8267',
+      },
+      '/passport': {
+        target: 'http://182.43.52.124:8267',
+      },
     }
   }
 })

@@ -1,2 +1,3 @@
 /// <reference types="vite/client" />
-declare module 'viog-ui'
+
+// declare module 'qs'

@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { toRegister } from '../../../../network/register'
+  import { toRegister } from '../../../../network/user'
   import { ref } from "vue"
   import { ViToast } from "viog-ui"
 
