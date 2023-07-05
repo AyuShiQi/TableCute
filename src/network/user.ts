@@ -1,4 +1,8 @@
+/**
+ * 这里是与用户相关的接口，包括账号密码登录、找回密码与信息修改
+ */
 import { request } from './request'
+import { ToRegister, ToLogin, ToUpdate } from './interface/user'
 
 /**
  * 注册接口
@@ -6,7 +10,7 @@ import { request } from './request'
  * @param password 密码
  * @returns 响应data
  */
-export const toRegister = (username: string, password: string) => {
+export const toRegister: ToRegister = (username: string, password: string) => {
   return request({
     url: '/user/register',
     method: 'post',
@@ -14,7 +18,7 @@ export const toRegister = (username: string, password: string) => {
       username,
       password
     }
-  }).then(val => val)
+  }).then((val: ToRegister) => val)
 }
 
 /**
@@ -23,7 +27,7 @@ export const toRegister = (username: string, password: string) => {
  * @param password 密码
  * @returns 响应data
  */
-export const toLogin = (username: string, password: string) => {
+export const toLogin: ToLogin = (username: string, password: string) => {
   return request({
     url: '/user/login',
     method: 'get',
@@ -31,7 +35,7 @@ export const toLogin = (username: string, password: string) => {
       username,
       password
     }
-  }).then(val => val)
+  }).then((val: ToLogin) => val)
 }
 
 /**
@@ -40,12 +44,12 @@ export const toLogin = (username: string, password: string) => {
  * @param option 用户信息
  * @returns 响应data
  */
-export const toUpdate = (token: string, option?: any) => {
+export const toUpdate: ToUpdate = (token: string, option?: any) => {
   return request({
     url: '/user/update',
     method: 'put',
     headers: {
       'satoken': `Baser ${token}`
     }
-  }).then(val => val)
+  }).then((val: ToUpdate) => val)
 }

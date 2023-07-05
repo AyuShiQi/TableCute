@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
 
-export const request = (config: AxiosRequestConfig) => {
+export const request = (config: AxiosRequestConfig): any => {
     // 1.创建axios实例
     const instance = axios.create({
         baseURL: '/',
@@ -18,7 +18,7 @@ export const request = (config: AxiosRequestConfig) => {
     });
 
     // 2.响应拦截
-    instance.interceptors.response.use(res=>{
+    instance.interceptors.response.use(res => {
         return res.data;
     },err=>{
         console.log(err);

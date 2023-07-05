@@ -1,18 +1,22 @@
+/**
+ * 这里是与短信登录相关的接口
+ */
 import { request } from './request'
+import type { TelLogin, ToGetSMCode } from './interface/passport'
 
 /**
  * 获取手机登录验证码
  * @param mobile 手机号
  * @returns 响应data
  */
-export const toGetSMCode = (mobile: string) => {
+export const toGetSMCode: ToGetSMCode = (mobile: string) => {
   return request({
     url: '/passport/getSMSCode',
     method: 'get',
     params: {
       mobile
     }
-  }).then(val => val)
+  }).then((val: ToGetSMCode) => val)
 }
 
 /**
@@ -21,7 +25,7 @@ export const toGetSMCode = (mobile: string) => {
  * @param smsCode 验证码
  * @returns 响应data
  */
-export const doLogin = (mobile: string, smsCode: string) => {
+export const telLogin: TelLogin = (mobile: string, smsCode: string) => {
   return request({
       url: '/passport/doLogin',
       method: 'post',
@@ -29,5 +33,5 @@ export const doLogin = (mobile: string, smsCode: string) => {
         "mobile": mobile,
         "smsCode": smsCode
       }
-  }).then(val => val)
+  }).then((val: TelLogin) => val)
 }
