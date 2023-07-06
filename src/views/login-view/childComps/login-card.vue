@@ -9,7 +9,17 @@
             <!-- 注册登录状态改变 -->
             <p class="login-card__right__register-link">
               <span>{{ isLogin ? '没有' : '已有' }}账号？</span>
-              <vi-link color="purple" @click="changeRegister">前往{{ isLogin ? '注册' : '登录' }}</vi-link>
+              <vi-bubble
+              dark
+              direction="left"
+              style="--vi-bubble-width: 236px;">
+                <vi-link color="purple" @click="changeState">
+                  前往{{ isLogin ? '注册' : '登录' }}
+                </vi-link>
+                <template v-slot:content>
+                  手机号获取验证码可直接注册登录
+                </template>
+              </vi-bubble>
             </p>
             <div class="login-card__right__title">
               <h1>你好，</h1>
@@ -40,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from "vue"
+  import { ref, provide } from "vue"
   import LoginImg from "./login-img.vue"
   import { ViToast } from "viog-ui"
 
@@ -53,9 +63,15 @@
     ViToast.open('微信登录将在后续版本上线，敬请期待~')
   }
 
-  function changeRegister () {
+  function changeState () {
     isLogin.value = !isLogin.value
   }
+
+  function toLogin () {
+    isLogin.value = true
+  }
+
+  provide('login-card-to-login', toLogin)
 </script>
 
 <style lang="less">

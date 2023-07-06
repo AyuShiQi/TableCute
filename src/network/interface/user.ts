@@ -1,12 +1,24 @@
 import type { TuResponse } from './request'
 
-type ToRegisterBack = TuResponse<any>
+type ToRegisterBack = TuResponse<null>
 
-type ToLoginBack = TuResponse<any>
+type ToLoginBack = TuResponse<{
+  isLogin: boolean
+  loginDevice: string
+  loginId: string
+  loginType: string
+  sessionTimeout: number
+  tag: any
+  tokenActivityTimeout: number
+  tokenName: "satoken"
+  tokenSessionTimeout: number
+  tokenTimeout: number
+  tokenValue: string
+}>
 
 type ToUpdateBack = TuResponse<any>
   
-export type ToRegister = (username: string, password: string) => Promise<ToRegisterBack>
+export type ToRegister = (username: string, password: string, mobile?: string, email?: string) => Promise<ToRegisterBack>
 
 export type ToLogin = (username: string, password: string) => Promise<ToLoginBack>
 

@@ -30,6 +30,9 @@ export default defineConfig({
       '/passport': {
         target: 'http://182.43.52.124:8267',
       },
+      '/getcodebye': {
+        target: 'http://182.43.52.124:8267',
+      },
     }
   }
 })

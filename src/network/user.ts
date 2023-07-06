@@ -8,15 +8,19 @@ import { ToRegister, ToLogin, ToUpdate } from './interface/user'
  * 注册接口
  * @param username 用户名 
  * @param password 密码
+ * @param mobile 电话号码
+ * @param email 邮箱
  * @returns 响应data
  */
-export const toRegister: ToRegister = (username: string, password: string) => {
+export const toRegister: ToRegister = (username: string, password: string, mobile?: string, email?: string) => {
   return request({
     url: '/user/register',
     method: 'post',
     params: {
       username,
-      password
+      password,
+      mobile,
+      email
     }
   }).then((val: ToRegister) => val)
 }

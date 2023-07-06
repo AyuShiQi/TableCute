@@ -6,8 +6,8 @@ import { ref } from 'vue'
 // 内部hooks
 import limitSmscodeState from './limit-smscode-state'
 // 外部模块
-import router from "@/router"
-import { ViToast } from 'viog-ui'
+import { jumpToHome, jumpToFinPassword } from '@/global/router-option'
+import { ViToast, ViMessage } from 'viog-ui'
 import { telephoneReg } from '@/regs/user'
 // 网络接口
 import { toLogin } from '@/network/user'
@@ -21,7 +21,7 @@ export default function () {
   /**
    * 是否处于手机验证码登录端
    */
-  const tel = ref(true)
+  const tel = ref(false)
   // 以下是表单接收数据
   /**
    * 账号表单值
@@ -39,6 +39,14 @@ export default function () {
    * 手机验证码表单值
    */
   const telCode = ref()
+  /**
+   * 登录中提示
+   */
+  const isLoging = ref(false)
+  /**
+   * 手机号码前缀选择
+   */
+  const telPrefix = ref()
   // reactive
   // inject
   // computed
@@ -54,6 +62,7 @@ export default function () {
    * @param submit vi-form组件中用于触发submit的函数
    */
   function handleClick (submit: () => void) {
+    if (isLoging) return
     submit()
   }
   /**
@@ -63,22 +72,49 @@ export default function () {
    * @param option 包括规则匹配详细结果集 resMap 与 反馈数据信息函数 getSubmitFeedback
    */
   function handleSubmit (formMap: Map<string, any>, res: boolean, option: any) {
-    console.log(res)
-    console.log(formMap)
+    // console.log(res)
+    // console.log(formMap)
+    // console.log(tel.value, !res)
     if (!res) return
-    if (!tel.value) toLogin(username.value, password.value).then(val => console.log(val))
-    else toDoLogin().then((val) => {
-      const feedbackMap = new Map<string, string>()
-      // 登录成功，跳转去首页
-      if (val.code === 200) {
-        // 这一步还要进行token获取信息
-        jumpToHome(val.data.token)
-      // 表示验证码错误
-      } else if (val.code === 506) {
-        feedbackMap.set('smscode', '验证码错误')
-        option.getSubmitFeedback(feedbackMap)
-      }
-    })
+    isLoging.value = true
+    if (!tel.value) {
+      // 这里是账户密码登录
+      toLogin(username.value, password.value).then(val => {
+        isLoging.value = false
+        // console.log(val)
+        const feedbackMap = new Map<string, string>()
+        // 登录成功，跳转去首页
+        if (val.code === 200) {
+          ViMessage.append('登录成功！为您跳转至首页', 2000)
+          // 这一步还要进行token获取信息
+          jumpToHome(val.data.tokenName, val.data.tokenValue)
+        // 表示验证码错误
+        } else if (val.message === '用户不存在') {
+          feedbackMap.set('username', val.message)
+          option.getSubmitFeedback(feedbackMap)
+        } else if (val.message === '密码错误') {
+          feedbackMap.set('password', val.message)
+          option.getSubmitFeedback(feedbackMap)
+        }
+      })
+    } else {
+      // 这里是手机验证码登录
+      toDoLogin().then((val) => {
+        isLoging.value = false
+        // console.log(val)
+        const feedbackMap = new Map<string, string>()
+        // 登录成功，跳转去首页
+        if (val.code === 200) {
+          ViMessage.append('登录成功！为您跳转至首页', 2000)
+          // 这一步还要进行token获取信息
+          jumpToHome(val.data.tokenName, val.data.tokenValue)
+        // 表示验证码错误
+        } else if (val.code === 506) {
+          feedbackMap.set('smscode', '验证码错误')
+          option.getSubmitFeedback(feedbackMap)
+        }
+      })
+    }
   }
 
   /**
@@ -111,14 +147,14 @@ export default function () {
   function toDoLogin () {
     return telLogin(loginTel.value, telCode.value)
   }
-  // 方法
+
   /**
-   * 保存token并跳转到首页
+   * 找回密码处理
    */
-  function jumpToHome (token: string) {
-    // 保存token
-    router.push({ path: '/' })
+  function handleFindPassword () {
+    jumpToFinPassword()
   }
+  // 方法
   // 普通function函数
   // provide
   // 生命周期
@@ -129,9 +165,12 @@ export default function () {
     password,
     loginTel,
     telCode,
+    isLoging,
+    telPrefix,
     changeLoginMethod,
     handleSubmit,
     handleClick,
+    handleFindPassword,
     getSMCode
   }
 }

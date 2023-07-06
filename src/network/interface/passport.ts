@@ -1,7 +1,17 @@
 import type { TuResponse } from './request'
 
 type TelLoginBack = TuResponse<{
-  token: string
+  isLogin: boolean
+  loginDevice: string
+  loginId: string
+  loginType: string
+  sessionTimeout: number
+  tag: any
+  tokenActivityTimeout: number
+  tokenName: "satoken"
+  tokenSessionTimeout: number
+  tokenTimeout: number
+  tokenValue: string
 }>
 
 type ToGetSMCodeBack = TuResponse<any>
