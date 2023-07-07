@@ -1,3 +1,4 @@
+import qs from 'qs'
 /**
  * 这里是与短信登录相关的接口
  */
@@ -30,8 +31,8 @@ export const telLogin: TelLogin = (mobile: string, smsCode: string) => {
       url: '/passport/doLogin',
       method: 'post',
       data: {
-        "mobile": mobile,
-        "smsCode": smsCode
+        mobile,
+        smsCode
       }
   }).then((val: TelLogin) => val)
 }

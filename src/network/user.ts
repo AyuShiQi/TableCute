@@ -16,7 +16,7 @@ export const toRegister: ToRegister = (username: string, password: string, mobil
   return request({
     url: '/user/register',
     method: 'post',
-    params: {
+    data: {
       username,
       password,
       mobile,

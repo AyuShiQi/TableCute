@@ -62,7 +62,7 @@ export default function () {
    * @param submit vi-form组件中用于触发submit的函数
    */
   function handleClick (submit: () => void) {
-    if (isLoging) return
+    if (isLoging.value) return
     submit()
   }
   /**
@@ -129,7 +129,7 @@ export default function () {
       // 发送验证码
       toGetSMCode(loginTel.value)
       .then((val: any) => {
-        console.log(val)
+        // console.log(val)
         if (val.code === 505) {
           ViToast.open(val.message)
         }

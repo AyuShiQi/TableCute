@@ -77,7 +77,7 @@
       getCodeBye(email.value).then(val => {
       isWaiting.value = false
       const feedbackMap = new Map<string, string>()
-      console.log(val)
+      // console.log(val)
       if (val.code === 500) {
         feedbackMap.set('email', '该邮箱未注册')
         option.getSubmitFeedback(feedbackMap)
