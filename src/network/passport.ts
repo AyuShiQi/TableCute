@@ -21,7 +21,7 @@ export const toGetSMCode: ToGetSMCode = (mobile: string) => {
 }
 
 /**
- * 手机验证码登录
+ * 手机验证码登录 需要返还json
  * @param mobile 手机号
  * @param smsCode 验证码
  * @returns 响应data

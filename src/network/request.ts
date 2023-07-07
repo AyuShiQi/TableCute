@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import type { AxiosRequestConfig } from 'axios'
 
 export const request = (config: AxiosRequestConfig): any => {
@@ -13,7 +12,7 @@ export const request = (config: AxiosRequestConfig): any => {
 
     // 1.请求拦截
     instance.interceptors.request.use(config => {
-        config.data = qs.stringify(config.data)
+        // config.data = qs.stringify(config.data)
         return config;
     },err => {
         console.log(err);

@@ -3,9 +3,10 @@
  */
 import { request } from './request'
 import { ToRegister, ToLogin, ToUpdate } from './interface/user'
+import qs from 'qs'
 
 /**
- * 注册接口
+ * 注册接口 需要返还
  * @param username 用户名 
  * @param password 密码
  * @param mobile 电话号码
@@ -16,12 +17,12 @@ export const toRegister: ToRegister = (username: string, password: string, mobil
   return request({
     url: '/user/register',
     method: 'post',
-    data: {
+    data: qs.stringify({
       username,
       password,
       mobile,
       email
-    }
+    })
   }).then((val: ToRegister) => val)
 }
 
