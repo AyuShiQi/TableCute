@@ -17,6 +17,8 @@ type ToLoginBack = TuResponse<{
 }>
 
 type ToUpdateBack = TuResponse<any>
+
+type BackPasswordBack = TuResponse<any>
   
 export type ToRegister = (username: string, password: string, mobile?: string, email?: string) => Promise<ToRegisterBack>
 
@@ -40,3 +42,5 @@ export type ToUpdate = (token: string, option?: {
 	updateBy?: string,
 	userName?: string
 }) => Promise<ToUpdateBack>
+
+export type BackPassword = (email: string, code: string, password: string) => Promise<BackPasswordBack>

@@ -60,7 +60,7 @@ export const passwordReg = /^[A-Za-z][A-Za-z0-9]{7,15}$/
 export const passwordRegisterRules = [
   {
     rule: passwordReg,
-    info: '账号需由以字母开头的8-16位数字和字母组成'
+    info: '密码需由以字母开头的8-16位数字和字母组成'
   }
 ]
 /**
