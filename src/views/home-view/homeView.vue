@@ -11,9 +11,7 @@
           <vi-link class="home-header__nav-item" href="javascript:;">模板中心</vi-link>
         </vi-nav>
         <!-- 头像显示区 -->
-        <vi-avater>
-          <vi-icon type="wode"></vi-icon>
-        </vi-avater>
+        <vi-avater src="https://s1.ax1x.com/2023/07/19/pC7Gi0s.png" style="background-color: transparent;"></vi-avater>
       </div>
     </vi-header>
     <!-- 菜单区 -->

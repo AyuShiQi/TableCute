@@ -33,6 +33,9 @@ export default defineConfig({
       '/getcodebye': {
         target: 'http://182.43.52.124:8267',
       },
+      '/addEmail': {
+        target: 'http://182.43.52.124:8267',
+      }
     }
   }
 })

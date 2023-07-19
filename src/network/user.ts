@@ -2,7 +2,19 @@
  * 这里是与用户相关的接口，包括账号密码登录、找回密码与信息修改
  */
 import { request } from './request'
-import { ToRegister, ToLogin, ToUpdate, BackPassword, GetInfo, ChangePassword, UpdateInfo } from './interface/user'
+import {
+  ToRegister,
+  ToLogin, ToUpdate,
+  BackPassword,
+  GetInfo,
+  ChangePassword,
+  UpdateInfo,
+  GetLPhoneUpdateSMS,
+  ChangeMobile,
+  BindMobile,
+  BindEmail,
+  AddEmail
+} from './interface/user'
 import qs from 'qs'
 
 /**
@@ -114,6 +126,12 @@ export const changePassword: ChangePassword = (oldPassword: string, newPassword:
   })
 }
 
+/**
+ * 更新用户信息
+ * @param token token
+ * @param option 头像和昵称
+ * @returns 响应datas
+ */
 export const updateInfo: UpdateInfo = (token: string, option: {
   avater?: string,
   nickname?: string, 
@@ -128,5 +146,127 @@ export const updateInfo: UpdateInfo = (token: string, option: {
       'nickname': option.nickname,
       'avater': option.avater
     })
+  })
+}
+
+/**
+ * 获取绑定手机号验证码
+ * @param token token
+ * @param mobile 电话号码
+ * @returns 响应datas
+ */
+export const getLPhoneAddSMS: GetLPhoneUpdateSMS = (token: string, mobile: string) => {
+  return request({
+    url: '/passport/getLPhoneAddSMS',
+    method: 'get',
+    headers: {
+      'satoken': token
+    },
+    params: {
+      mobile
+    }
+  })
+}
+
+/**
+ * 获取更换手机号验证码
+ * @param token token
+ * @param mobile 电话号码
+ * @returns 响应datas
+ */
+export const getLPhoneUpdateSMS: GetLPhoneUpdateSMS = (token: string, mobile: string) => {
+  return request({
+    url: '/passport/getLPhoneUpdateSMS',
+    method: 'get',
+    headers: {
+      'satoken': token
+    },
+    params: {
+      mobile
+    }
+  })
+}
+
+/**
+ * 修改用户手机号
+ * @param token token
+ * @param mobile 旧手机
+ * @param smscode 验证码
+ * @param newMobile 新手机
+ * @returns 响应data
+ */
+export const changeMobile: ChangeMobile = (token: string, mobile: string, smscode: string, newMobile: string) => {
+  return request({
+    url: '/user/users/mobile',
+    method: 'post',
+    headers: {
+      'satoken': token
+    },
+    data: qs.stringify({
+      phoneNumber: mobile,
+      verifyCode: smscode,
+      newPhoneNumber: newMobile
+    })
+  })
+}
+
+/**
+ * 绑定用户手机号
+ * @param token token
+ * @param mobile 手机
+ * @param smscode 验证码
+ * @returns 响应data
+ */
+export const bindMobile: BindMobile = (token: string, mobile: string, smscode: string) => {
+  return request({
+    url: '/user/bindMobile',
+    method: 'post',
+    headers: {
+      'satoken': token
+    },
+    data: qs.stringify({
+      mobile,
+      verificationCode: smscode
+    })
+  })
+}
+
+/**
+ * 绑定用户邮箱
+ * @param token token
+ * @param email 邮箱
+ * @param smscode 验证码
+ * @returns 响应data
+ */
+export const bindEmail: BindEmail = (token: string, email: string, smscode: string) => {
+  return request({
+    url: '/user/bindEmail',
+    method: 'post',
+    headers: {
+      'satoken': token
+    },
+    data: qs.stringify({
+      email,
+      code: smscode
+    })
+  })
+}
+
+/**
+ * 获取邮箱验证码
+ * @param token token
+ * @param email 邮箱
+ * @returns 响应datas
+ */
+export const addEmail: AddEmail = (token: string, email: string) => {
+  return request({
+    url: '/addEmail',
+    method: 'get',
+    headers: {
+      'satoken': token
+    },
+    params: {
+      email
+    }
   })
 }

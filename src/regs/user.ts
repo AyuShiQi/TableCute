@@ -75,6 +75,8 @@ export const passwordRules = [
   }
 ]
 
+export const emailReg = /^([a-zA-Z\d][\w-]{2,})@(\w{2,})\.([a-z]{2,})(\.[a-z]{2,})?$/
+
 export const emailRules = [
   {
     rule: (email?: string) => {
