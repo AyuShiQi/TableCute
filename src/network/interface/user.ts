@@ -27,6 +27,11 @@ type GetInfoBack = TuResponse<{
   nickname: string
   userName: string
 }>
+
+type ChangePasswordBack = TuResponse<any>
+
+type UpdateInfoBack = TuResponse<any>
+
   
 export type ToRegister = (username: string, password: string, mobile?: string, email?: string) => Promise<ToRegisterBack>
 
@@ -53,3 +58,8 @@ export type ToUpdate = (token: string, option?: {
 
 export type BackPassword = (email: string, code: string, password: string) => Promise<BackPasswordBack>
 export type GetInfo = (token: string) => Promise<GetInfoBack>
+export type ChangePassword = (oldPassword: string, newPassword: string, token: string) => Promise<ChangePasswordBack>
+export type UpdateInfo = (token: string, option: {
+  avater?: string,
+  nickname?: string, 
+}) => Promise<UpdateInfoBack>
