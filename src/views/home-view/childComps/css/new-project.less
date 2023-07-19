@@ -1,28 +1,38 @@
-.new-project-content {
-    display: flex;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    align-content: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 16px;
+.new-project-scroll {
+    --vi-scroll-width: 100%;
+    margin-bottom: 8px;
+    .new-project-content {
+        display: flex;
+        margin-top: 16px;
+        padding-bottom: 16px;
+        align-content: center;
+        justify-content: flex-start;
+        // flex-wrap: wrap;
+        gap: 16px;
+
+        .type-card {
+            flex-shrink: 0;
+        }
+    }
 }
 
 .model-search-content {
-    margin-top: 16px;
-
     .model-search-content__top {
+        position: sticky;
+        top: 44px;
         display: flex;
         width: 100%;
+        padding-top: 16px;
+        padding-bottom: 16px;
         align-items: center;
         justify-content: space-between;
+        background-color: #fff;
     }
 
     .model-search-content__label {
-        .vi-tag {
-            margin-top: 16px;
-            margin-right: 8px;
-        }
+        display: flex;
+        gap: 16px 8px;
+        flex-wrap: wrap;
     }
 
     .model-search-content__view {
@@ -32,5 +42,58 @@
         align-content: center;
         flex-wrap: wrap;
         gap: 16px;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .new-project-scroll {
+        .new-project-content {
+            margin-top: 8px;
+            gap: 8px;
+            .type-card {
+                width: 8em;
+                height: 5em;
+            }
+        }
+    }
+
+    .model-search-content {
+        .model-search-content__top {
+            .template-search-input {
+                width: 100%;
+            }
+
+            .goto-template-btn {
+                display: none;
+            }
+        }
+
+        .model-search-content__view {
+            justify-content: space-between;
+            gap: 8%;
+            .project-card {
+                width: 46%;
+                height: 190px;
+                border-radius: var(--vi-card-radius);
+                box-sizing: border-box;
+            
+                .project-card__img {
+                    width: 100%;
+                    height: 140px;
+                    margin-bottom: 8px;
+                }
+            
+                .project-card__title {
+                    width: 6em;
+                    height: 1em;
+                    margin-bottom: 8px;
+                }
+            
+                .project-card__desc {
+                    width: 8em;
+                    height: 1em;
+                }
+            }
+        }
     }
 }

@@ -7,9 +7,10 @@
 import router from "@/router"
 
 export function jumpToHome (tokenName: string, token: string) {
+  console.log('ok')
   // 保存token
   localStorage.setItem('tableCuteSatoken', `Bearer ${token}`)
-  router.push({ path: '/home/new-project' })
+  router.push('/home/new-project')
 }
 
 export function jumpToLogin () {

@@ -10,6 +10,7 @@
           <vi-link class="home-header__nav-item" href="javascript:;">交流社区</vi-link>
           <vi-link class="home-header__nav-item" href="javascript:;">模板中心</vi-link>
         </vi-nav>
+        <!-- 头像显示区 -->
         <vi-avater>
           <vi-icon type="wode"></vi-icon>
         </vi-avater>
@@ -18,18 +19,9 @@
     <!-- 菜单区 -->
     <div class="home-content">
       <div class="home-content__menu-content">
-        <div class="home-content__menu-nav">
-          <svg class="list-menu"
-          @click="changeMenuOpen"
-          viewBox="0 0 1024 1024"
-          version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <path d="M918.507 443.947H104.64c-37.547 0-68.16 30.72-68.16 68.16 0 37.546 30.72 68.16 68.16 68.16h813.867c37.546 0 68.16-30.72 68.16-68.16s-30.72-68.16-68.16-68.16z m-0.32 306.88H104.32c-37.547 0-68.16 30.72-68.16 68.16 0 37.546 30.72 68.16 68.16 68.16h813.867c37.546 0 68.16-30.72 68.16-68.16 0-37.547-30.614-68.16-68.16-68.16z m1.066-610.667H105.387c-37.547 0-68.16 30.72-68.16 68.16 0 37.547 30.72 68.16 68.16 68.16h813.866c37.547 0 68.16-30.72 68.16-68.16 0-37.547-30.72-68.16-68.16-68.16z"/>
-          </svg>
-        </div>
         <vi-menu
         v-show="menuOpen"
         class="home-content__menu"
-        :defaultId="1"
         router>
           <vi-menu-item to="/home/new-project">
             <template v-slot:prefix>
@@ -38,19 +30,19 @@
             新的制作
           </vi-menu-item>
           <vi-divider></vi-divider>
-          <vi-menu-group title="我的制作" scalable option>
+          <vi-menu-group title="我的制作" scalable option to="/home/my-project">
             <vi-menu-item>图表</vi-menu-item>
             <vi-menu-item>数据</vi-menu-item>
             <vi-menu-item>回收站</vi-menu-item>
           </vi-menu-group>
           <vi-divider></vi-divider>
           <vi-menu-group title="模板中心">
-            <vi-menu-item>发现模板</vi-menu-item>
-            <vi-menu-item>我的收藏</vi-menu-item>
-            <vi-menu-item>我的分享</vi-menu-item>
+            <vi-menu-item to="/home/tc/ft">发现模板</vi-menu-item>
+            <vi-menu-item to="/home/tc/mc">我的收藏</vi-menu-item>
+            <vi-menu-item to="/home/tc/ms">我的分享</vi-menu-item>
           </vi-menu-group>
           <vi-divider></vi-divider>
-          <vi-menu-item to="/login">
+          <vi-menu-item to="/home/profile">
             <template v-slot:prefix>
               <vi-icon type="shezhi"></vi-icon>
             </template>
@@ -63,13 +55,65 @@
         <router-view></router-view>
       </div>
     </div>
+    <!-- 手机版目录区 -->
+    <vi-tabbar class="home-tabbar">
+      <vi-tabbar-item to="/home/new-project">
+        <template v-slot:icon>
+          <vi-icon type="shouye"></vi-icon>
+        </template>
+        首页
+      </vi-tabbar-item>
+      <vi-tabbar-item to="/home/my-project">
+        <template v-slot:icon>
+          <vi-icon type="wenjianjia"></vi-icon>
+        </template>
+        项目
+      </vi-tabbar-item>
+      <!-- 新建按钮 -->
+      <div class="home-tabbar__new-btn">
+        <svg xmlns="http://www.w3.org/2000/svg"
+        class="home-tabbar__new-btn__add"
+        viewBox="0 0 20 20"
+        version="1.1">
+          <path d="M10 18 L10 2 M2 10 L18 10"/>
+        </svg>
+      </div>
+      <vi-tabbar-item to="/home/tc">
+        <template v-slot:icon>
+          <vi-icon type="qushi"></vi-icon>
+        </template>
+        模板
+      </vi-tabbar-item>
+      <vi-tabbar-item to="/home/profile">
+        <template v-slot:icon>
+          <vi-icon type="shezhi"></vi-icon>
+        </template>
+        设置
+      </vi-tabbar-item>
+    </vi-tabbar>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import router from '../../router';
+  import { onMounted } from 'vue'
   import myProjectState from './hooks/home-view-state'
-  const { menuOpen, changeMenuOpen } = myProjectState()
+  import { useProfileStore } from '@/store'
+  import { jumpToLogin } from '@/global/router-option'
+  import { getToken } from '@/global/local-storage-option'
+  const { menuOpen } = myProjectState()
+  const profileStore = useProfileStore()
+
+
+  onMounted(() => {
+    // 跳转到登录页面
+    if (!profileStore.isLogin) {
+      // 寻找token
+      const token = getToken()
+      if (token) {
+        profileStore.getProfile(token)
+      } else jumpToLogin()
+    }
+  })
 </script>
 
 <style lang="less">

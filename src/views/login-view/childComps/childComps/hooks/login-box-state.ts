@@ -12,6 +12,8 @@ import { telephoneReg } from '@/regs/user'
 // 网络接口
 import { toLogin } from '@/network/user'
 import { toGetSMCode, telLogin } from "@/network/passport"
+// 仓库
+import { useProfileStore } from '@/store'
 
 export default function () {
   const limitSmscode = limitSmscodeState()
@@ -48,6 +50,10 @@ export default function () {
    */
   const telPrefix = ref()
   // reactive
+  /**
+   * profile仓库
+   */
+  const profileStore = useProfileStore()
   // inject
   // computed
   // 事件方法
@@ -86,6 +92,7 @@ export default function () {
         // 登录成功，跳转去首页
         if (val.code === 200) {
           ViMessage.append('登录成功！为您跳转至首页', 2000)
+          profileStore.getProfile(`Bearer ${val.data.tokenValue}`)
           // 这一步还要进行token获取信息
           jumpToHome(val.data.tokenName, val.data.tokenValue)
         // 表示验证码错误
@@ -106,6 +113,8 @@ export default function () {
         // 登录成功，跳转去首页
         if (val.code === 200) {
           ViMessage.append('登录成功！为您跳转至首页', 2000)
+          // profileStore.isLogin = val.data.isLogin
+          profileStore.getProfile(`Bearer ${val.data.tokenValue}`)
           // 这一步还要进行token获取信息
           jumpToHome(val.data.tokenName, val.data.tokenValue)
         // 表示验证码错误

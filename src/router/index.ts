@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 // home
 const homeView  = () => import('../views/home-view/homeView.vue')
 const newProjectView = () => import('@/views/home-view/childComps/newProject.vue')
+const myProjectView = () => import('@/views/home-view/childComps/myProject.vue')
+const templateCenterView = () => import('@/views/home-view/childComps/templateCenter.vue')
+const profileView = () => import('@/views/home-view/childComps/profile.vue')
 
 // login
 const loginView = () => import('@/views/login-view/loginView')
@@ -16,7 +19,7 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/home/new-project'
     },
     {
       path: '/home',
@@ -25,6 +28,18 @@ export default createRouter({
         {
           path: '/home/new-project',
           component: newProjectView
+        },
+        {
+          path: '/home/my-project',
+          component: myProjectView
+        },
+        {
+          path: '/home/tc',
+          component: templateCenterView
+        },
+        {
+          path: '/home/profile',
+          component: profileView
         }
       ]
     },

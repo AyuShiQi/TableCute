@@ -2,7 +2,7 @@
  * 这里是与用户相关的接口，包括账号密码登录、找回密码与信息修改
  */
 import { request } from './request'
-import { ToRegister, ToLogin, ToUpdate, BackPassword } from './interface/user'
+import { ToRegister, ToLogin, ToUpdate, BackPassword, GetInfo } from './interface/user'
 import qs from 'qs'
 
 /**
@@ -76,4 +76,19 @@ export const backPassword: BackPassword = (email: string, code: string, password
       password
     }
   }).then((val: BackPassword) => val)
+}
+
+/**
+ * 获取用户信息接口
+ * @param token 用户token
+ * @returns 响应data
+ */
+export const getInfo: GetInfo = (token: string) => {
+  return request({
+    url: '/user/info',
+    method: 'get',
+    headers: {
+      satoken: token
+    }
+  })
 }
