@@ -13,7 +13,9 @@ import {
   ChangeMobile,
   BindMobile,
   BindEmail,
-  AddEmail
+  AddEmail,
+  HasAccount,
+  SetAccount
 } from './interface/user'
 import qs from 'qs'
 
@@ -268,5 +270,42 @@ export const addEmail: AddEmail = (token: string, email: string) => {
     params: {
       email
     }
+  })
+}
+
+/**
+ * 获取该用户是否有绑定账号
+ * @param token 
+ * @returns 
+ */
+export const hasAccount: HasAccount = (token: string) => {
+  return request({
+    url: '/user/account',
+    method: 'get',
+    headers: {
+      'satoken': token
+    }
+  })
+}
+
+
+/**
+ * 设置账号和密码
+ * @param token token
+ * @param username 设置账号
+ * @param password 设置密码
+ * @returns 响应data
+ */
+export const setAccount: SetAccount = (token: string, username: string, password: string) => {
+  return request({
+    url: '/user/account',
+    method: 'put',
+    headers: {
+      'satoken': token
+    },
+    data: qs.stringify({
+      'userName': username,
+      password
+    })
   })
 }

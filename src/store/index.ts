@@ -1,7 +1,8 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { createPinia, defineStore } from 'pinia'
-import { getInfo } from '@/network/user'
+import { getInfo, hasAccount as account } from '@/network/user'
 import { jumpToLogin } from '@/global/router-option'
+import { saveToken } from '@/global/local-storage-option'
 
 const pinia = createPinia()
 
@@ -18,6 +19,7 @@ export const useProfileStore = defineStore('profile', () => {
   const avater = ref()
   const mobile = ref()
   const email = ref()
+  const hasAccount = ref(false)
 
   function getProfile (nowToken?: string) {
     if (nowToken) token.value = nowToken
@@ -33,7 +35,26 @@ export const useProfileStore = defineStore('profile', () => {
         jumpToLogin()
       }
     })
+    account(token.value).then(data => {
+      hasAccount.value = data.code === 500 ? true : false
+    })
   }
+
+  function clearInfo () {
+    token.value = undefined
+    userName.value = undefined
+    nickName.value = undefined
+    avater.value = undefined
+    mobile.value = undefined
+    email.value = undefined
+    hasAccount.value = false
+    isLogin.value = false
+    saveToken('')
+  }
+
+  watch(isLogin, (newVal: boolean) => {
+    if (!newVal) jumpToLogin()
+  })
 
   return {
     isLogin,
@@ -43,6 +64,8 @@ export const useProfileStore = defineStore('profile', () => {
     avater,
     mobile,
     email,
-    getProfile
+    hasAccount,
+    getProfile,
+    clearInfo
   }
 })

@@ -42,6 +42,10 @@ type BindEmailBack = TuResponse<any>
 
 type AddEmailBack = TuResponse<any>
 
+type HasAccountBack = TuResponse<any>
+
+type SetAccountBack = TuResponse<any>
+
 export type ToRegister = (username: string, password: string, mobile?: string, email?: string) => Promise<ToRegisterBack>
 
 export type ToLogin = (username: string, password: string) => Promise<ToLoginBack>
@@ -79,3 +83,5 @@ export type ChangeMobile = (token: string, mobile: string, smscode: string, newM
 export type BindMobile = (token: string, mobile: string, smscode: string) => Promise<BindMobileBack>
 export type BindEmail = (token: string, email: string, smscode: string) => Promise<BindEmailBack>
 export type AddEmail = (token: string, email: string) => Promise<AddEmailBack>
+export type HasAccount = (token: string) => Promise<HasAccountBack>
+export type SetAccount = (token: string, username: string, password: string) => Promise<SetAccountBack>

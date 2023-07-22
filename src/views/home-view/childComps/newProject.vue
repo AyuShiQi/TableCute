@@ -48,7 +48,6 @@ import pieCard from '../../../components/content/pieCard.vue';
 import lineCard from '../../../components/content/lineCard.vue';
 import scatterCard from '../../../components/content/scatterCard.vue';
 import projectCard from '../../../components/content/projectCard.vue'
-
 </script>
 
 <style lang="less">

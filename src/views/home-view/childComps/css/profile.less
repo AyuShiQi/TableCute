@@ -9,7 +9,7 @@
     }
 
     p {
-        color: var(--vi-link-color);
+        color: var(--vi-icon-color);
     }
 
     div[class^=profile-],
@@ -24,6 +24,13 @@
     }
 
     .profile-base {
+        .profile-base__username {
+            padding-top: 0;
+
+            .profile__title {
+                padding-bottom: 8px;
+            }
+        }
         .password-change {
             display: flex;
             padding: 8px 0;
@@ -33,6 +40,16 @@
             .password-change-btn {
                 margin-top: 8px;
             }
+        }
+    }
+
+    .profile-account {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .account-change-btn {
+            margin-top: 8px;
         }
     }
 
@@ -94,5 +111,9 @@
         .email-change-btn {
             margin-top: 8px;
         }
+    }
+
+    .delete-account-btn {
+        margin-top: 32px;
     }
 }
