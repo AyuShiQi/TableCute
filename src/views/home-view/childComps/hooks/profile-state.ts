@@ -39,6 +39,13 @@ export default function () {
     setAccount(profileStore.token, username.value, password.value).then(val => {
       if (val.code === 200) {
         ViMessage.append('账户绑定成功', 2000)
+        username.value = ''
+        password.value = ''
+        needAccount.value = false
+      } else {
+        const feedbackMap = new Map<string, string>()
+        feedbackMap.set('username', val.message)
+        option.getSubmitFeedback(feedbackMap)
       }
     })
   }
@@ -194,7 +201,6 @@ export default function () {
   }
 
   function dropAccount () {
-    console.log('ok')
     profileStore.clearInfo()
   }
 

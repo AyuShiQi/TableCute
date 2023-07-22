@@ -57,6 +57,15 @@ export default createRouter({
           component: passwordFindView
         }
       ]
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/views/not-found-view/not-found-view.vue')
+    },
+    {
+      path: '/:pathMatch(.*)',
+      redirect: '/404'
     }
   ]
 })

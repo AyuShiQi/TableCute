@@ -156,7 +156,9 @@
           @click="submit">保存</vi-button>
         </template>
       </vi-form>      
-      <p v-else>{{ profileStore.email ?? '暂未绑定邮箱' }}</p>
+      <p v-else>
+        {{ profileStore.email ?? '暂未绑定邮箱' }}
+      </p>
       <vi-button @click="needEmail = !needEmail">{{ needEmail ? '取消' :profileStore.email ? '修改邮箱' : '绑定邮箱'}}</vi-button>
     </div>
     <vi-button color="red" class="delete-account-btn" @click="dropAccount">注销账户</vi-button>

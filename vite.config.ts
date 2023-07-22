@@ -37,5 +37,18 @@ export default defineConfig({
         target: 'http://182.43.52.124:8267',
       }
     }
+  },
+  build: {
+    outDir: './dist',
+    assetsDir: './assetsDir',
+    cssCodeSplit: true,
+    emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        entry: path.resolve(__dirname, './index.html'),
+        project: path.resolve(__dirname, './project/index.html')
+      }
+    }
   }
 })
+

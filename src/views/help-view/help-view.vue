@@ -6,7 +6,7 @@
       </div>
       <h1>图酷帮助中心</h1>
       <div class="help-center-view__header__nav">
-        <vi-link class="nav-item" target="_blank" href="http://182.43.52.124:9200">返回首页</vi-link>
+        <vi-link class="nav-item" target="_blank" href="/">返回首页</vi-link>
         <vi-link class="nav-item">关于我们</vi-link>
       </div>
     </div>
