@@ -6,8 +6,6 @@ import './assets/css/normalize.css'
 import './style.less'
 import App from './project-app.vue'
 
-
-
 createApp(App)
 .use(pinia)
 .use(Viog)

@@ -2,7 +2,7 @@
   <h6>快速创建</h6>
   <vi-scroll class="new-project-scroll" overlay hidden>
     <div class="new-project-content">
-      <barCard></barCard>
+      <a href="/project/" style="display: block;"><barCard></barCard></a>
       <pieCard></pieCard>
       <lineCard></lineCard>
       <scatterCard></scatterCard>
