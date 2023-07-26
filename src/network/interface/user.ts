@@ -46,7 +46,7 @@ type HasAccountBack = TuResponse<any>
 
 type SetAccountBack = TuResponse<any>
 
-export type ToRegister = (username: string, password: string, mobile?: string, email?: string) => Promise<ToRegisterBack>
+export type ToRegister = (username: string, password: string) => Promise<ToRegisterBack>
 
 export type ToLogin = (username: string, password: string) => Promise<ToLoginBack>
 

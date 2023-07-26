@@ -134,7 +134,7 @@
   function updateCanvas () {
     const canvas = e.value.children[0].children[0]
     var link = document.createElement("a");
-    var imgData =canvas.toDataURL();
+    var imgData = canvas.toDataURL();
     var strDataURI = imgData.substr(22, imgData.length);
     var blob = dataURLtoBlob(imgData);
     var objurl = URL.createObjectURL(blob);

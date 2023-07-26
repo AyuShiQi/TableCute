@@ -27,15 +27,13 @@ import qs from 'qs'
  * @param email 邮箱
  * @returns 响应data
  */
-export const toRegister: ToRegister = (username: string, password: string, mobile?: string, email?: string) => {
+export const toRegister: ToRegister = (username: string, password: string) => {
   return request({
     url: '/user/register',
     method: 'post',
     data: qs.stringify({
       username,
-      password,
-      mobile,
-      email
+      password
     })
   }).then((val: ToRegister) => val)
 }
