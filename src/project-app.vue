@@ -2,17 +2,19 @@
   <div class="project-view">
     <!-- 头部 -->
     <project-header @update="updateCanvas"/>
-    <div class="project-view__content"
-    @mousedown="handleContentMousedown"
-    @touchstart="handleContentMousedown">
+    <div class="project-view__content">
       <!-- 图表画布 -->
       <div
       class="project-view__content__canvas"
       @wheel="handleContentWheel"
+      @mousedown="handleContentMousedown"
+      @touchstart="handleContentMousedown"
       ref="e"
       :style="{
         transform: `translate(${canvasLeft}px, ${canvasTop}px) scale(${projectSize}%)`
-      }"></div>
+      }">
+       <amor-chart :option="chartOption"></amor-chart>
+      </div>
       <!-- 画布比例放大器 -->
       <project-size-control v-model="projectSize"/>
       <!-- 操作抽屉 -->
@@ -40,7 +42,24 @@
         </vi-scroll>
         <vi-scroll class="project-view__content__drawer-item" v-show="navId === 2">
           <vi-collapse-group accordion>
-            <vi-collapse title="画布大小"></vi-collapse>
+            <vi-collapse title="画布大小">
+              <vi-form>
+                <vi-form-item label="长">
+                  <vi-input type="button" v-model="chartOption.width">
+                    <template v-slot:suffix>
+                      px
+                    </template>
+                  </vi-input>
+                </vi-form-item>
+                <vi-form-item label="宽">
+                  <vi-input type="button" v-model="chartOption.height">
+                    <template v-slot:suffix>
+                      px
+                    </template>
+                  </vi-input>
+                </vi-form-item>
+              </vi-form>
+            </vi-collapse>
             <vi-collapse title="项目名称"></vi-collapse>
             <vi-collapse title="项目属性"></vi-collapse>
             <vi-collapse title="修改列表"></vi-collapse>
@@ -52,8 +71,7 @@
 </template>
 
 <script lang="ts" setup>
-  import * as echarts from 'echarts'
-  import { onMounted, ref, onBeforeUnmount } from 'vue'
+  import { onMounted, ref, onBeforeUnmount, reactive } from 'vue'
 
   import projectHeader from './components/project/project-header.vue'
   import projectSizeControl from './components/project/project-size-control.vue'
@@ -67,6 +85,94 @@
   const drawerDirection = ref('right')
   const projectSize = ref(100)
   const e = ref()
+
+  const chartOption = reactive({
+    type: 0, // 条形图
+    width: 300,
+    height: 100,
+    background: 'pink',
+    attention: {
+      color: '#888',
+      size: 12,
+      font: 'serif'
+    },
+    padding: {
+      x: 8,
+      y: 8,
+      gap: 8
+    },
+
+    data: [
+      ['类型', '数量'],
+      ['高中', 482.3],
+      ['学士', 568],
+      ['硕士', 573.8],
+      ['博士', 200]
+    ],
+    title: {
+      content: '这里是标题',
+      size: 32,
+      color: '#000',
+      align: 'top-left',
+      font: 'serif' // 'Helvetica'// 'serif'
+    },
+    info: {
+      unit: '单位：百万',
+      unitSize: 16,
+      unitColor: '#bbb',
+      unitAlign: 'left',
+      unitFont: 'serif', // 'Helvetica'// 'serif'
+      source: '来源：百万青年人大学习网',
+      sourceSize: 16,
+      sourceColor: '#bbb',
+      sourceAlign: 'left',
+      sourceFont: 'serif' // 'Helvetica'// 'serif'
+    },
+    axis: {
+      x: {
+        type: 'line',
+        label: true,
+        line: 'none',
+        color: '#000',
+        lineColor: '#aaa',
+        labelColor: '#888',
+        labelSize: 12
+      },
+      y: {
+        type: 'line', // none line arrow(带箭头的)
+        label: true,
+        line: 'line',
+        color: '#000',
+        lineColor: '#aaa',
+        labelColor: '#888',
+        labelSize: 12
+      }
+    },
+    label: {
+      content: [
+        {
+          tag: '高中',
+          color: '#ffbe96'
+        },
+        {
+          tag: '学士',
+          color: '#ffff96'
+        },
+        {
+          tag: '硕士',
+          color: '#747bff'
+        },
+        {
+          tag: '博士',
+          color: '#96ffde'
+        }
+      ],
+      color: '#aaa',
+      size: 14,
+      align: 'top',
+      font: 'serif' // 'Helvetica'// 'serif'
+    }
+  })
 
   function handleResize (e: any) {
     if (e.target.innerWidth <= 700) {
@@ -132,7 +238,7 @@
   }
 
   function updateCanvas () {
-    const canvas = e.value.children[0].children[0]
+    const canvas = e.value.children[0]
     var link = document.createElement("a");
     var imgData = canvas.toDataURL();
     var strDataURI = imgData.substr(22, imgData.length);
@@ -162,25 +268,6 @@
     window.addEventListener('mouseup', handleMouseup)
     window.addEventListener('touchend', handleMouseup)
     window.addEventListener('mouseleave', handleMouseup)
-    const myE = echarts.init(e.value)
-
-    myE.setOption({
-      title: {
-        text: 'ECharts 入门示例'
-      },
-      tooltip: {},
-      xAxis: {
-        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-      },
-      yAxis: {},
-      series: [
-        {
-          name: '销量',
-          type: 'bar',
-          data: [5, 20, 36, 10, 10, 20]
-        }
-      ]
-    })
   })
 
   onBeforeUnmount(() => {
