@@ -23,7 +23,8 @@ import {
   bindMobile,
   bindEmail,
   addEmail,
-  setAccount
+  setAccount,
+  setAvater
 } from '@/network/user'
 
 export default function () {
@@ -102,6 +103,12 @@ export default function () {
     }
 
   // 头像修改区
+  function handleAddAvater (file: File) {
+    setAvater(profileStore.token, file).then(val => {
+      profileStore.avater = val.data
+    })
+  }
+
   // 手机号区
   const needMobile = ref(false)
   const mobile = ref('')
@@ -221,6 +228,7 @@ export default function () {
     nickname,
     changeNicknameSubmit,
     // 头像修改区
+    handleAddAvater,
     // 手机号区
     needMobile,
     mobile,

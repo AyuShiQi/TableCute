@@ -6,7 +6,7 @@
       type="button"
       class="project-name__input"
       placeholder="未命名项目"
-      v-model="projectName"></vi-input>
+      v-model="project.title"></vi-input>
     </div>
     <div class="project-header__option">
       <vi-button class="project-header__option-item">
@@ -22,7 +22,10 @@
 <script lang="ts" setup>
   import { ref } from 'vue'
   const emit = defineEmits(['update'])
-  const projectName = ref('')
+
+  defineProps([
+    'project'
+  ])
 
   function toUpdate () {
     emit('update')

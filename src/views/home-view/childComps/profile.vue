@@ -83,7 +83,8 @@
     </div>
     <vi-divider></vi-divider>
     <h6>用户头像</h6>
-    <vi-upload class="profile-avater" accept="image/*">
+    <!-- 用户头像区 -->
+    <vi-upload class="profile-avater" accept="image/*" @addphoto="handleAddAvater">
       <vi-upload-choose photo :imgsrc="profileStore.avater"></vi-upload-choose>
       <vi-upload-choose>
         <vi-button>修改头像</vi-button>
@@ -193,6 +194,7 @@ const {
   nickname,
   changeNicknameSubmit,
   // 头像修改区
+  handleAddAvater,
   // 手机号区
   needMobile,
   mobile,

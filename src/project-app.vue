@@ -1,7 +1,7 @@
 <template>
   <div class="project-view">
     <!-- 头部 -->
-    <project-header @update="updateCanvas"/>
+    <project-header @update="updateCanvas" :project="chartProject"/>
     <div class="project-view__content">
       <!-- 图表画布 -->
       <div
@@ -13,7 +13,7 @@
       :style="{
         transform: `translate(${canvasLeft}px, ${canvasTop}px) scale(${projectSize}%)`
       }">
-       <amor-chart :option="chartOption"></amor-chart>
+       <amor-chart :option="chartOption" ref="chartDOM"></amor-chart>
       </div>
       <!-- 画布比例放大器 -->
       <project-size-control v-model="projectSize"/>
@@ -28,42 +28,12 @@
           <vi-nav-item>画布属性</vi-nav-item>
         </vi-nav>
         <vi-table-editor v-show="navId === 0" class="project-view__content__drawer-item">
-
         </vi-table-editor>
         <vi-scroll class="project-view__content__drawer-item" v-show="navId === 1">
-          <vi-collapse-group accordion>
-            <vi-collapse title="坐标系"></vi-collapse>
-            <vi-collapse title="字体"></vi-collapse>
-            <vi-collapse title="颜色"></vi-collapse>
-            <vi-collapse title="标签"></vi-collapse>
-            <vi-collapse title="附加信息"></vi-collapse>
-            <vi-collapse title="边框"></vi-collapse>
-          </vi-collapse-group>
+          <chart-controller :option="chartOption" :project="chartProject"/>
         </vi-scroll>
         <vi-scroll class="project-view__content__drawer-item" v-show="navId === 2">
-          <vi-collapse-group accordion>
-            <vi-collapse title="画布大小">
-              <vi-form>
-                <vi-form-item label="长">
-                  <vi-input type="button" v-model="chartOption.width">
-                    <template v-slot:suffix>
-                      px
-                    </template>
-                  </vi-input>
-                </vi-form-item>
-                <vi-form-item label="宽">
-                  <vi-input type="button" v-model="chartOption.height">
-                    <template v-slot:suffix>
-                      px
-                    </template>
-                  </vi-input>
-                </vi-form-item>
-              </vi-form>
-            </vi-collapse>
-            <vi-collapse title="项目名称"></vi-collapse>
-            <vi-collapse title="项目属性"></vi-collapse>
-            <vi-collapse title="修改列表"></vi-collapse>
-          </vi-collapse-group>
+          <canvas-controller :option="chartOption" :project="chartProject"/>
         </vi-scroll>
       </vi-drawer>
     </div>
@@ -71,10 +41,13 @@
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref, onBeforeUnmount, reactive } from 'vue'
+  import { onMounted, ref, onBeforeUnmount, reactive, watch } from 'vue'
 
   import projectHeader from './components/project/project-header.vue'
   import projectSizeControl from './components/project/project-size-control.vue'
+
+  import canvasController from './components/project/canvas-controller.vue'
+  import chartController from './components/project/chart-controller.vue'
 
   import { getToken } from '@/global/local-storage-option'
   import { useProfileStore } from './store'
@@ -84,13 +57,19 @@
   const navId = ref(0)
   const drawerDirection = ref('right')
   const projectSize = ref(100)
+  const chartDOM = ref()
   const e = ref()
+
+  const chartProject = reactive({
+    title: undefined
+  })
 
   const chartOption = reactive({
     type: 0, // 条形图
-    width: 300,
-    height: 100,
-    background: 'pink',
+    width: '600',
+    height: '600',
+    background: 'transparent',
+    unitGap: 40,
     attention: {
       color: '#888',
       size: 12,
@@ -101,7 +80,6 @@
       y: 8,
       gap: 8
     },
-
     data: [
       ['类型', '数量'],
       ['高中', 482.3],
@@ -174,6 +152,11 @@
     }
   })
 
+  watch(chartOption, () => {
+    console.log(chartOption)
+    chartDOM.value.render()
+  }, { immediate: false })
+
   function handleResize (e: any) {
     if (e.target.innerWidth <= 700) {
       drawerDirection.value = 'bottom'
@@ -230,7 +213,8 @@
   }
 
   function handleContentWheel (e: any) {
-    if (e.zrDelta > 0) {
+    // console.log(e)
+    if (e.deltaY < 0) {
       projectSize.value = Math.min(500, projectSize.value + 10)
     } else {
       projectSize.value = Math.max(50, projectSize.value - 10)

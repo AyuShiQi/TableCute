@@ -13,6 +13,7 @@ export const request = (config: AxiosRequestConfig): any => {
     // 1.请求拦截
     instance.interceptors.request.use(config => {
         // config.data = qs.stringify(config.data)
+        // console.log(config)
         return config;
     },err => {
         console.log(err);

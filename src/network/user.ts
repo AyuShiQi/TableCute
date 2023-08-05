@@ -15,7 +15,8 @@ import {
   BindEmail,
   AddEmail,
   HasAccount,
-  SetAccount
+  SetAccount,
+  SetAvater
 } from './interface/user'
 import qs from 'qs'
 
@@ -305,5 +306,25 @@ export const setAccount: SetAccount = (token: string, username: string, password
       'userName': username,
       password
     })
+  })
+}
+
+/**
+ * 设置账号和密码
+ * @param token token
+ * @param username 设置账号
+ * @param password 设置密码
+ * @returns 响应data
+ */
+export const setAvater: SetAvater = (token: string, file: File) => {
+  const data = new FormData()
+  data.append('file', file)
+  return request({
+    url: '/user/images',
+    method: 'post',
+    headers: {
+      'satoken': token
+    },
+    data
   })
 }
