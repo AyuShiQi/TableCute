@@ -23,6 +23,14 @@
     <!-- 坐标系 -->
     <vi-collapse title="坐标系">
       <vi-form>
+        <vi-form-item label="最小间距">
+          <vi-input v-model="option.unitGap" placeholder="输入y轴单位最小间距" type="button">
+            <template v-slot:suffix>
+              px
+            </template>
+          </vi-input>
+        </vi-form-item>
+        <vi-divider style="margin-bottom: 16px;"/>
         <vi-form-item label="x轴样式">
           <vi-select v-model="option.axis.x.type" placeholder="" type="button">
             <vi-option value="none">无</vi-option>

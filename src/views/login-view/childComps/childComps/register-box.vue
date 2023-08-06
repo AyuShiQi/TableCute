@@ -71,7 +71,7 @@
     const { getSubmitFeedback } = option
     if (res) {
       isRegistering.value = true
-      toRegister(registerAccount.value, registerPassword.value, 'aaaaaaaaaa', '123@qq.com').then((val) => {
+      toRegister(registerAccount.value, registerPassword.value).then((val) => {
         isRegistering.value = false
         // console.log(val)
         if (val.code === 500) {

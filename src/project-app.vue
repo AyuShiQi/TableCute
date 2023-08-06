@@ -29,10 +29,10 @@
         </vi-nav>
         <vi-table-editor v-show="navId === 0" class="project-view__content__drawer-item">
         </vi-table-editor>
-        <vi-scroll class="project-view__content__drawer-item" v-show="navId === 1">
+        <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 1">
           <chart-controller :option="chartOption" :project="chartProject"/>
         </vi-scroll>
-        <vi-scroll class="project-view__content__drawer-item" v-show="navId === 2">
+        <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 2">
           <canvas-controller :option="chartOption" :project="chartProject"/>
         </vi-scroll>
       </vi-drawer>
@@ -293,6 +293,7 @@
       --vi-drawer-padding: 14px;
       .project-view__content__drawer-item {
         margin-top: 8px;
+        --vi-scroll-height: 100%;
         --vi-collapse-width: 100%;
         --vi-table-width: 100%;
         --vi-table-height: 340px;
