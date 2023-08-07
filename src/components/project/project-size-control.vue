@@ -54,7 +54,7 @@ function addSize () {
 }
 
 function deleteSize () {
-  emit('update:modelValue', Math.max(50, props.modelValue - 10))
+  emit('update:modelValue', Math.max(30, props.modelValue - 10))
 }
 </script>
 

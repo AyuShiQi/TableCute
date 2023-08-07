@@ -18,6 +18,16 @@
             <vi-option value="serif"></vi-option>
           </vi-select>
         </vi-form-item>
+        <vi-form-item label="对齐">
+          <vi-select v-model="option.title.align" type="button">
+            <vi-option value="top-left">左上</vi-option>
+            <vi-option value="top-center">中上</vi-option>
+            <vi-option value="top-right">右上</vi-option>
+            <vi-option value="bottom-left">左下</vi-option>
+            <vi-option value="bottom-center">中下</vi-option>
+            <vi-option value="bottom-right">右下</vi-option>
+          </vi-select>
+        </vi-form-item>
       </vi-form>
     </vi-collapse>
     <!-- 坐标系 -->
@@ -130,9 +140,55 @@
         </vi-form-item>
       </vi-form>
     </vi-collapse>
-    <vi-collapse title="颜色"></vi-collapse>
-    <vi-collapse title="标签"></vi-collapse>
-    <vi-collapse title="附加信息"></vi-collapse>
+    <vi-collapse title="颜色">
+    </vi-collapse>
+    <vi-collapse title="标签">
+      <vi-form>
+        <vi-form-item label="显示标签">
+          <vi-switch v-model="option.label.open"></vi-switch>
+        </vi-form-item>
+        <vi-form-item label="标签大小">
+          <vi-input v-model="labelSize" placeholder="字体大小" type="button">
+            <template v-slot:suffix>
+              px
+            </template>
+          </vi-input>
+        </vi-form-item>
+        <vi-form-item label="字体样式">
+          <vi-select v-model="option.label.font" type="button">
+            <vi-option value="serif"></vi-option>
+          </vi-select>
+        </vi-form-item>
+        <vi-form-item label="对齐">
+          <vi-select v-model="option.label.align" type="button">
+            <vi-option value="top">靠上</vi-option>
+            <vi-option value="bottom">靠下</vi-option>
+          </vi-select>
+        </vi-form-item>
+      </vi-form>
+    </vi-collapse>
+    <vi-collapse title="附加信息">
+      <vi-form>
+        <vi-form-item label="单位">
+          <vi-input v-model="option.info.unit" type="button"></vi-input>
+        </vi-form-item>
+        <vi-form-item label="单位对齐">
+          <vi-select v-model="option.info.unitAlign" type="button">
+            <vi-option value="left">靠左</vi-option>
+            <vi-option value="right">靠右</vi-option>
+          </vi-select>
+        </vi-form-item>
+        <vi-form-item label="来源">
+          <vi-input v-model="option.info.source" type="button"></vi-input>
+        </vi-form-item>
+        <vi-form-item label="来源对齐">
+          <vi-select v-model="option.info.sourceAlign" type="button">
+            <vi-option value="left">靠左</vi-option>
+            <vi-option value="right">靠右</vi-option>
+          </vi-select>
+        </vi-form-item>
+      </vi-form>
+    </vi-collapse>
     <vi-collapse title="边框"></vi-collapse>
   </vi-collapse-group>
 </template>
@@ -145,6 +201,7 @@ const props = defineProps([
 ])
 
 const titleSize = ref(props.option.title.size)
+const labelSize = ref(props.option.label.size)
 const xlabelSize = ref(props.option.axis.x.labelSize)
 const ylabelSize = ref(props.option.axis.y.labelSize)
 
@@ -158,6 +215,10 @@ watch(xlabelSize, () => {
 
 watch(ylabelSize, () => {
   props.option.axis.y.labelSize = Number(ylabelSize.value)
+})
+
+watch(labelSize, () => {
+  props.option.label.size = Number(labelSize.value)
 })
 </script>
 

@@ -27,7 +27,7 @@
           <vi-nav-item>图表样式</vi-nav-item>
           <vi-nav-item>画布属性</vi-nav-item>
         </vi-nav>
-        <vi-table-editor v-show="navId === 0" class="project-view__content__drawer-item">
+        <vi-table-editor v-model="chartOption.data" v-show="navId === 0" class="project-view__content__drawer-item">
         </vi-table-editor>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 1">
           <chart-controller :option="chartOption" :project="chartProject"/>
@@ -64,6 +64,13 @@
     title: undefined
   })
 
+  const chartData = reactive([
+    ['类型', '数量'],
+    ['高中', 482.3],
+    ['学士', 568],
+    ['硕士', 573.8],
+    ['博士', 200]
+  ])
   const chartOption = reactive({
     type: 0, // 条形图
     width: '600',
@@ -80,13 +87,7 @@
       y: 8,
       gap: 8
     },
-    data: [
-      ['类型', '数量'],
-      ['高中', 482.3],
-      ['学士', 568],
-      ['硕士', 573.8],
-      ['博士', 200]
-    ],
+    data: chartData,
     title: {
       content: '这里是标题',
       size: 32,
@@ -127,6 +128,7 @@
       }
     },
     label: {
+      open: true,
       content: [
         {
           tag: '高中',
@@ -153,9 +155,10 @@
   })
 
   watch(chartOption, () => {
-    console.log(chartOption)
+    if (Number(chartOption.height) <= 10) chartOption.height = '10'
     chartDOM.value.render()
   }, { immediate: false })
+
 
   function handleResize (e: any) {
     if (e.target.innerWidth <= 700) {
@@ -217,7 +220,7 @@
     if (e.deltaY < 0) {
       projectSize.value = Math.min(500, projectSize.value + 10)
     } else {
-      projectSize.value = Math.max(50, projectSize.value - 10)
+      projectSize.value = Math.max(30, projectSize.value - 10)
     }
   }
 
