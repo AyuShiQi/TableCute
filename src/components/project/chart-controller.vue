@@ -140,8 +140,34 @@
         </vi-form-item>
       </vi-form>
     </vi-collapse>
-    <vi-collapse title="颜色">
+    <!-- 提示数据 -->
+    <vi-collapse title="提示数据">
+      <vi-form-item label="数据显示">
+        <vi-switch v-model="option.attention.open"></vi-switch>
+      </vi-form-item>
+      <vi-form-item label="字体大小">
+        <vi-input v-model="attentionSize" type="button" placeholder="在此填写数据字体尺寸">
+          <template v-slot:suffix>
+            px
+          </template>
+        </vi-input>
+      </vi-form-item>
+      <vi-form-item label="字体样式">
+        <vi-select v-model="option.attention.font" type="button">
+          <vi-option value="serif"></vi-option>
+        </vi-select>
+      </vi-form-item>
+      <vi-form-item label="x轴颜色">
+        <vi-select v-model="option.attention.color" type="button">
+          <vi-option value="#000">黑色</vi-option>
+          <vi-option value="#666">灰色</vi-option>
+          <vi-option value="#aaa">浅灰色</vi-option>
+          <vi-option value="blue">蓝色</vi-option>
+          <vi-option value="pink">粉色</vi-option>
+        </vi-select>
+      </vi-form-item>
     </vi-collapse>
+    <!-- 标签 -->
     <vi-collapse title="标签">
       <vi-form>
         <vi-form-item label="显示标签">
@@ -167,6 +193,7 @@
         </vi-form-item>
       </vi-form>
     </vi-collapse>
+    <!-- 附加信息 -->
     <vi-collapse title="附加信息">
       <vi-form>
         <vi-form-item label="单位">
@@ -204,21 +231,31 @@ const titleSize = ref(props.option.title.size)
 const labelSize = ref(props.option.label.size)
 const xlabelSize = ref(props.option.axis.x.labelSize)
 const ylabelSize = ref(props.option.axis.y.labelSize)
+const attentionSize = ref(props.option.attention.size)
 
 watch(titleSize, () => {
-  props.option.title.size = Number(titleSize.value)
+  if (titleSize.value) props.option.title.size = Number(titleSize.value)
+  else props.option.title.size = 24
 })
 
 watch(xlabelSize, () => {
-  props.option.axis.x.labelSize = Number(xlabelSize.value)
+  if (xlabelSize.value) props.option.axis.x.labelSize = Number(xlabelSize.value)
+  else props.option.axis.x.labelSize = 14
 })
 
 watch(ylabelSize, () => {
-  props.option.axis.y.labelSize = Number(ylabelSize.value)
+  if (ylabelSize.value) props.option.axis.y.labelSize = Number(ylabelSize.value)
+  else props.option.axis.y.labelSize = 14
 })
 
 watch(labelSize, () => {
-  props.option.label.size = Number(labelSize.value)
+  if (labelSize.value) props.option.label.size = Number(labelSize.value)
+  else props.option.label.size = 12
+})
+
+watch(attentionSize, () => {
+  if (attentionSize.value) props.option.attention.size = Number(attentionSize.value)
+  else props.option.attention.size = 12
 })
 </script>
 
