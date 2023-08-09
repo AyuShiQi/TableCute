@@ -7,7 +7,7 @@
           <vi-input v-model="option.title.content" placeholder="在此设置标题" type="button"></vi-input>
         </vi-form-item>
         <vi-form-item label="字体大小">
-          <vi-input v-model="titleSize" placeholder="字体大小" type="button">
+          <vi-input v-model="titleSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
@@ -61,7 +61,7 @@
           <vi-switch v-model="option.axis.x.label"></vi-switch>
         </vi-form-item>
         <vi-form-item label="标签大小">
-          <vi-input v-model="xlabelSize" placeholder="字体大小" type="button">
+          <vi-input v-model="xlabelSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
@@ -110,7 +110,7 @@
           <vi-switch v-model="option.axis.y.label"></vi-switch>
         </vi-form-item>
         <vi-form-item label="标签大小">
-          <vi-input v-model="ylabelSize" placeholder="字体大小" type="button">
+          <vi-input v-model="ylabelSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
@@ -146,7 +146,7 @@
         <vi-switch v-model="option.attention.open"></vi-switch>
       </vi-form-item>
       <vi-form-item label="字体大小">
-        <vi-input v-model="attentionSize" type="button" placeholder="在此填写数据字体尺寸">
+        <vi-input v-model="attentionSize" type="button" placeholder="在此填写数据字体尺寸" number>
           <template v-slot:suffix>
             px
           </template>
@@ -174,7 +174,7 @@
           <vi-switch v-model="option.label.open"></vi-switch>
         </vi-form-item>
         <vi-form-item label="标签大小">
-          <vi-input v-model="labelSize" placeholder="字体大小" type="button">
+          <vi-input v-model="labelSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
@@ -234,6 +234,7 @@ const ylabelSize = ref(props.option.axis.y.labelSize)
 const attentionSize = ref(props.option.attention.size)
 
 watch(titleSize, () => {
+  console.log(titleSize.value)
   if (titleSize.value) props.option.title.size = Number(titleSize.value)
   else props.option.title.size = 24
 })
