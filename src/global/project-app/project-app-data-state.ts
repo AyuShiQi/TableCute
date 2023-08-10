@@ -109,7 +109,7 @@ export default function (chartDOM: Ref) {
         }
       ],
       color: '#aaa',
-      size: 14,
+      size: 11,
       align: 'top',
       font: 'serif' // 'Helvetica'// 'serif'
     }
@@ -156,6 +156,7 @@ export default function (chartDOM: Ref) {
       }
       originData[i][1] = curData
     }
+    console.log(originLabel)
   }, { immediate: true })
   // 事件方法
   // 方法
