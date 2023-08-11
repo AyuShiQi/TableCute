@@ -61,7 +61,7 @@
           <vi-switch v-model="option.axis.x.label"></vi-switch>
         </vi-form-item>
         <vi-form-item label="标签大小">
-          <vi-input v-model="option.axis.x.size" placeholder="字体大小" type="button" number>
+          <vi-input v-model="option.axis.x.labelSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
@@ -110,7 +110,7 @@
           <vi-switch v-model="option.axis.y.label"></vi-switch>
         </vi-form-item>
         <vi-form-item label="标签大小">
-          <vi-input v-model="option.axis.y.size" placeholder="字体大小" type="button" number>
+          <vi-input v-model="option.axis.y.labelSize" placeholder="字体大小" type="button" number>
             <template v-slot:suffix>
               px
             </template>
