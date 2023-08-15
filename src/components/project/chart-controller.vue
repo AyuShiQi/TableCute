@@ -2,9 +2,12 @@
   <vi-collapse-group>
     <!-- 标题 -->
     <vi-collapse title="标题">
-      <vi-form class="">
+      <vi-form>
         <vi-form-item label="标题">
           <vi-input v-model="option.title.content" placeholder="在此设置标题" type="button"></vi-input>
+        </vi-form-item>
+        <vi-form-item label="字体颜色">
+          <vi-color-select v-model="option.title.color"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="字体大小">
           <vi-input v-model="option.title.size" placeholder="字体大小" type="button" number>
@@ -49,13 +52,7 @@
           </vi-select>
         </vi-form-item>        
         <vi-form-item label="x轴颜色">
-          <vi-select v-model="option.axis.x.color" type="button">
-            <vi-option value="#000">黑色</vi-option>
-            <vi-option value="#666">灰色</vi-option>
-            <vi-option value="#aaa">浅灰色</vi-option>
-            <vi-option value="blue">蓝色</vi-option>
-            <vi-option value="pink">粉色</vi-option>
-          </vi-select>
+          <vi-color-select v-model="option.axis.x.color"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="x轴标签">
           <vi-switch v-model="option.axis.x.label"></vi-switch>
@@ -68,13 +65,7 @@
           </vi-input>
         </vi-form-item>
         <vi-form-item label="标签颜色">
-          <vi-select v-model="option.axis.x.labelColor" type="button">
-            <vi-option value="#000">黑色</vi-option>
-            <vi-option value="#666">灰色</vi-option>
-            <vi-option value="#aaa">浅灰色</vi-option>
-            <vi-option value="blue">蓝色</vi-option>
-            <vi-option value="pink">粉色</vi-option>
-          </vi-select>
+          <vi-color-select v-model="option.axis.x.labelColor"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="标签字样">
           <!-- 暂未添加字体样式 -->
@@ -98,13 +89,7 @@
           </vi-select>
         </vi-form-item>        
         <vi-form-item label="y轴颜色">
-          <vi-select v-model="option.axis.y.color" type="button">
-            <vi-option value="#000">黑色</vi-option>
-            <vi-option value="#666">灰色</vi-option>
-            <vi-option value="#aaa">浅灰色</vi-option>
-            <vi-option value="blue">蓝色</vi-option>
-            <vi-option value="pink">粉色</vi-option>
-          </vi-select>
+          <vi-color-select v-model="option.axis.y.color"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="y轴标签">
           <vi-switch v-model="option.axis.y.label"></vi-switch>
@@ -117,13 +102,7 @@
           </vi-input>
         </vi-form-item>
         <vi-form-item label="标签颜色">
-          <vi-select v-model="option.axis.y.labelColor" type="button">
-            <vi-option value="#000">黑色</vi-option>
-            <vi-option value="#666">灰色</vi-option>
-            <vi-option value="#aaa">浅灰色</vi-option>
-            <vi-option value="blue">蓝色</vi-option>
-            <vi-option value="pink">粉色</vi-option>
-          </vi-select>
+          <vi-color-select v-model="option.axis.y.labelColor"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="标签字样">
           <!-- 暂未添加字体样式 -->
@@ -158,13 +137,7 @@
         </vi-select>
       </vi-form-item>
       <vi-form-item label="x轴颜色">
-        <vi-select v-model="option.attention.color" type="button">
-          <vi-option value="#000">黑色</vi-option>
-          <vi-option value="#666">灰色</vi-option>
-          <vi-option value="#aaa">浅灰色</vi-option>
-          <vi-option value="blue">蓝色</vi-option>
-          <vi-option value="pink">粉色</vi-option>
-        </vi-select>
+        <vi-color-select v-model="option.attention.color"></vi-color-select>
       </vi-form-item>
     </vi-collapse>
     <!-- 标签 -->
@@ -172,6 +145,9 @@
       <vi-form>
         <vi-form-item label="显示标签">
           <vi-switch v-model="option.label.open"></vi-switch>
+        </vi-form-item>
+        <vi-form-item label="标签颜色">
+          <vi-color-select v-model="option.label.color"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="标签大小">
           <vi-input v-model="option.label.size" placeholder="字体大小" type="button" number>
@@ -199,6 +175,9 @@
         <vi-form-item label="单位">
           <vi-input v-model="option.info.unit" type="button"></vi-input>
         </vi-form-item>
+        <vi-form-item label="单位颜色">
+          <vi-color-select v-model="option.info.unitColor"></vi-color-select>
+        </vi-form-item>
         <vi-form-item label="单位对齐">
           <vi-select v-model="option.info.unitAlign" type="button">
             <vi-option value="left">靠左</vi-option>
@@ -208,6 +187,9 @@
         <vi-form-item label="来源">
           <vi-input v-model="option.info.source" type="button"></vi-input>
         </vi-form-item>
+        <vi-form-item label="来源颜色">
+          <vi-color-select v-model="option.info.soureColor"></vi-color-select>
+        </vi-form-item>
         <vi-form-item label="来源对齐">
           <vi-select v-model="option.info.sourceAlign" type="button">
             <vi-option value="left">靠左</vi-option>
@@ -216,7 +198,6 @@
         </vi-form-item>
       </vi-form>
     </vi-collapse>
-    <vi-collapse title="边框"></vi-collapse>
   </vi-collapse-group>
 </template>
 
