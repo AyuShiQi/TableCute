@@ -13,7 +13,7 @@
       :style="{
         transform: `translate(${canvasLeft}px, ${canvasTop}px) scale(${projectSize}%)`
       }">
-       <amor-chart :option="chartOption" ref="chartDOM"></amor-chart>
+        <amor-chart :option="chartOption" ref="chartDOM"></amor-chart>
       </div>
       <!-- 画布比例放大器 -->
       <project-size-control v-model="projectSize"/>
@@ -41,13 +41,13 @@
 </template>
 
 <script lang="ts" setup>
-  import projectHeader from './components/project/project-header.vue'
-  import projectSizeControl from './components/project/project-size-control.vue'
+  import projectHeader from './childComps/project-header.vue'
+  import projectSizeControl from './childComps/project-size-control.vue'
 
-  import canvasController from './components/project/canvas-controller.vue'
-  import chartController from './components/project/chart-controller.vue'
+  import canvasController from './childComps/canvas-controller.vue'
+  import chartController from './childComps/chart-controller.vue'
 
-  import projectAppState from '@/global/project-app/project-app-state'
+  import projectAppState from './hooks/project-app-state'
 
   const {
     chartDOM,

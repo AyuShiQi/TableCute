@@ -14,6 +14,9 @@ const loginView = () => import('@/views/login-view/loginView')
 const helpCenterView = () => import('@/views/help-view/help-view.vue')
 const passwordFindView = () => import('@/views/help-view/childComps/password-find.vue')
 
+// project
+const projectView = () => import('@/views/project-view/project-view.vue')
+
 export default createRouter({
   history: createWebHistory(),
   routes: [
@@ -57,6 +60,11 @@ export default createRouter({
           component: passwordFindView
         }
       ]
+    },
+    // 制作中心
+    {
+      path: '/project',
+      component: projectView
     },
     {
       path: '/404',

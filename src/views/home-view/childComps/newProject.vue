@@ -2,7 +2,7 @@
   <h6>快速创建</h6>
   <vi-scroll class="new-project-scroll" overlay hidden>
     <div class="new-project-content">
-      <a href="/project/" style="display: block;"><barCard></barCard></a>
+      <barCard @click=""></barCard>
       <pieCard></pieCard>
       <lineCard></lineCard>
       <scatterCard></scatterCard>
@@ -47,7 +47,18 @@ import barCard from '../../../components/content/barCard.vue'
 import pieCard from '../../../components/content/pieCard.vue';
 import lineCard from '../../../components/content/lineCard.vue';
 import scatterCard from '../../../components/content/scatterCard.vue';
-import projectCard from '../../../components/content/projectCard.vue'
+import projectCard from '../../../components/content/projectCard.vue';
+
+import { createProj } from '@/network/tab'
+
+function createBarProject () {
+  createProject(0)
+}
+
+function createProject (type: number) {
+  createProj([], {}, type).then(val => {
+  })
+}
 </script>
 
 <style lang="less">
