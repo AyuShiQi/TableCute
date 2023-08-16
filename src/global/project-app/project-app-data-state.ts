@@ -142,9 +142,10 @@ export default function (chartDOM: Ref) {
     for (let i = 1; i < chartData.length; i++) {
       if (chartData[i][0] === undefined) break 
       originData.push([])
+      // 此处添加origin颜色变化
       originLabel.push({
         tag: String(chartData[i][0]),
-        color: 'blue'
+        color: '#aaa'
       })
       originData[i][0] = chartData[i][0]
       let curData = 0

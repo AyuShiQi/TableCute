@@ -146,7 +146,7 @@
         <vi-form-item label="显示标签">
           <vi-switch v-model="option.label.open"></vi-switch>
         </vi-form-item>
-        <vi-form-item label="标签颜色">
+        <vi-form-item label="字体颜色">
           <vi-color-select v-model="option.label.color"></vi-color-select>
         </vi-form-item>
         <vi-form-item label="标签大小">
@@ -166,6 +166,11 @@
             <vi-option value="top">靠上</vi-option>
             <vi-option value="bottom">靠下</vi-option>
           </vi-select>
+        </vi-form-item>
+        <vi-divider></vi-divider>
+        <vi-form-item label="标签颜色"></vi-form-item>
+        <vi-form-item v-for="item in option.label.content" :key="item.tag" :label="item.tag">
+          <vi-color-select v-model="item.color"></vi-color-select>
         </vi-form-item>
       </vi-form>
     </vi-collapse>
