@@ -35,6 +35,12 @@ export default defineConfig({
       },
       '/addEmail': {
         target: 'http://182.43.52.124:8267',
+      },
+      '/tab': {
+        target: 'http://182.43.52.124:8267',
+      },
+      '/thumbnail': {
+        target: 'http://182.43.52.124:8267',
       }
     }
   },

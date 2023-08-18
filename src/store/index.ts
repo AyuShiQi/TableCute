@@ -1,8 +1,11 @@
-import { ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { createPinia, defineStore } from 'pinia'
 import { getInfo, hasAccount as account } from '@/network/user'
 import { jumpToLogin } from '@/global/router-option'
 import { saveToken } from '@/global/local-storage-option'
+// 网络接口
+import { getProj } from '@/network/tab'
+import { ViMessage } from 'viog-ui'
 
 const pinia = createPinia()
 
@@ -67,5 +70,41 @@ export const useProfileStore = defineStore('profile', () => {
     hasAccount,
     getProfile,
     clearInfo
+  }
+})
+
+/**
+ * 项目仓库
+ */
+export const useProjectStore = defineStore('project', () => {
+  const isUpdating = ref(true)
+  const projectList = reactive({
+    total: 0,
+    list: undefined as any
+  })
+  const nowProject = reactive({
+    name: '',
+    style: {},
+    data: [],
+    type: 0
+  })
+
+  function updateProjectList (token: string) {
+    getProj(token).then((val) => {
+      if (val.code === 200) {
+        isUpdating.value = false
+        projectList.list = val.data
+        projectList.total = val.data.length
+      } else {
+        ViMessage.append('用户信息登录过期！')
+      }
+    })
+  }
+
+
+  return {
+    projectList,
+    nowProject,
+    updateProjectList
   }
 })

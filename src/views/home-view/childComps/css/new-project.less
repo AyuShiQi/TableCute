@@ -42,6 +42,18 @@
         align-content: center;
         flex-wrap: wrap;
         gap: 16px;
+
+        .model-search-content__view-img {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: 40%;
+                object-fit: contain;
+            }
+        }
     }
 }
 
@@ -92,6 +104,13 @@
                 .project-card__desc {
                     width: 8em;
                     height: 1em;
+                }
+            }
+
+            .model-search-content__view-img {    
+                img {
+                    width: 100%;
+                    object-fit: contain;
                 }
             }
         }

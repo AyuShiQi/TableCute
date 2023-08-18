@@ -9,8 +9,8 @@ import './style.less'
 import App from './App'
 
 createApp(App)
-.use(pinia)
-.use(Router)
 .use(diagrAmor)
 .use(Viog)
+.use(pinia)
+.use(Router)
 .mount('#app')
