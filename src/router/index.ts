@@ -6,6 +6,12 @@ const newProjectView = () => import('@/views/home-view/childComps/newProject.vue
 const myProjectView = () => import('@/views/home-view/childComps/myProject.vue')
 const templateCenterView = () => import('@/views/home-view/childComps/templateCenter.vue')
 const profileView = () => import('@/views/home-view/childComps/profile.vue')
+// my-project]
+const myProjectAllView = () => import('@/views/home-view/childComps/my-project/all-project.vue')
+const myProjectTableView = () => import('@/views/home-view/childComps/my-project/table-project.vue')
+const myProjectChartView = () => import('@/views/home-view/childComps/my-project/chart-project.vue')
+const myProjectRecycleView = () => import('@/views/home-view/childComps/my-project/recycle-project.vue')
+
 
 // login
 const loginView = () => import('@/views/login-view/loginView')
@@ -34,7 +40,25 @@ export default createRouter({
         },
         {
           path: '/home/my-project',
-          component: myProjectView
+          component: myProjectView,
+          children: [
+            {
+              path: '/home/my-project/all',
+              component: myProjectAllView
+            },
+            {
+              path: '/home/my-project/table',
+              component: myProjectTableView
+            },
+            {
+              path: '/home/my-project/chart',
+              component: myProjectChartView
+            },
+            {
+              path: '/home/my-project/recycle',
+              component: myProjectRecycleView
+            }
+          ]
         },
         {
           path: '/home/tc',

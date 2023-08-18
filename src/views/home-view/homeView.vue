@@ -28,10 +28,10 @@
             新的制作
           </vi-menu-item>
           <vi-divider></vi-divider>
-          <vi-menu-group title="我的制作" scalable option to="/home/my-project">
-            <vi-menu-item>图表</vi-menu-item>
-            <vi-menu-item>数据</vi-menu-item>
-            <vi-menu-item>回收站</vi-menu-item>
+          <vi-menu-group title="我的制作" scalable option to="/home/my-project/all">
+            <vi-menu-item to="/home/my-project/chart">图表</vi-menu-item>
+            <vi-menu-item to="/home/my-project/table">数据</vi-menu-item>
+            <vi-menu-item to="/home/my-project/recycle">回收站</vi-menu-item>
           </vi-menu-group>
           <vi-divider></vi-divider>
           <vi-menu-group title="模板中心">
@@ -61,7 +61,7 @@
         </template>
         首页
       </vi-tabbar-item>
-      <vi-tabbar-item to="/home/my-project">
+      <vi-tabbar-item to="/home/my-project/all">
         <template v-slot:icon>
           <vi-icon type="wenjianjia"></vi-icon>
         </template>
@@ -95,12 +95,12 @@
 <script lang="ts" setup>
   import { onMounted } from 'vue'
   import myProjectState from './hooks/home-view-state'
-  import { useProfileStore } from '@/store'
+  import { useProfileStore, useProjectStore } from '@/store'
   import { jumpToLogin } from '@/global/router-option'
   import { getToken } from '@/global/local-storage-option'
   const { menuOpen } = myProjectState()
   const profileStore = useProfileStore()
-
+  const projectStore = useProjectStore()
 
   onMounted(() => {
     // 跳转到登录页面
@@ -108,7 +108,9 @@
       // 寻找token
       const token = getToken()
       if (token) {
-        profileStore.getProfile(token)
+        profileStore.getProfile(token).then(() => {
+          projectStore.updateProjectList(profileStore.token)
+        })
       } else jumpToLogin()
     }
   })
