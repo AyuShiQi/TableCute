@@ -9,6 +9,7 @@ export type TuProject = {
   type: number
   updateTime: string
   userId: number
+  url: string
 }
 
 type CreateProjBack = TuResponse<any>

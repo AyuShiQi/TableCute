@@ -1,7 +1,7 @@
 <template>
   <div class="project-view">
     <!-- 头部 -->
-    <project-header @update="updateCanvas" :option="chartOption"/>
+    <project-header @update="updateCanvas" :option="chartOption" :project="projectData"/>
     <div class="project-view__content">
       <!-- 图表画布 -->
       <div
@@ -58,6 +58,7 @@
     canvasTop,
     canvasLeft,
     // 数据部分
+    projectData,
     chartData,
     chartOption,
     // 数据部分结束

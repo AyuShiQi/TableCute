@@ -59,7 +59,7 @@ export function initProjectOption (type: number) {
     },
     label: {
       open: true,
-      content: [],
+      content: [] as any[],
       color: '#aaa',
       size: 11,
       align: 'top',

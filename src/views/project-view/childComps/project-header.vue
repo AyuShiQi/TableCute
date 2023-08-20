@@ -12,24 +12,42 @@
       <vi-button class="project-header__option-item">
         <vi-icon type="fenxiang"/>
       </vi-button>
-      <vi-button color="purple" @click="toUpdate">下载</vi-button>
-      <vi-button color="green">保存</vi-button>
-      <p class="project-header__attention">已保存 今日10:30</p>
+      <vi-button color="purple" @click="toSave">下载</vi-button>
+      <vi-button color="green" @click="toUpdate">保存</vi-button>
+      <p class="project-header__attention">{{ nowTime }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue'
-  const emit = defineEmits(['update'])
+  import { time } from 'echarts';
+import { computed } from 'vue'
+  const emit = defineEmits(['update', 'save'])
 
-  defineProps([
-    'option'
+  const props = defineProps([
+    'option',
+    'project'
   ])
 
   function toUpdate () {
     emit('update')
   }
+
+  function toSave () {
+    emit('save')
+  }
+
+  const nowTime = computed(() => {
+    const { updateTime, createTime } = props.project
+    console.log(props.project)
+    const date = new Date(updateTime)
+    const time = `${date.getHours()} : ${date.getMinutes()}`
+    if (updateTime === createTime) {
+      return `创建于 ${time}`
+    } else {
+      return `已保存 ${time}`
+    }
+  })
 </script>
 
 <style lang="less">

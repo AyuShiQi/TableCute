@@ -7,10 +7,11 @@ import { onMounted, ref, onBeforeUnmount, watch } from 'vue'
 import projectAppDataState from './project-app-data-state'
 // 外部模块
 import { getToken } from '@/global/local-storage-option'
-import { useProfileStore } from '@/store'
+import { useProfileStore, useProjectStore } from '@/store'
 
 export default function () {
   const profileStore = useProfileStore()
+  const projectStore = useProjectStore()
   // 普通常量
   /**
    * 用于图标拖动，分别代表上一轮的鼠标所处位置
@@ -153,7 +154,9 @@ export default function () {
   }
   // provide
   // 生命周期
-  profileStore.getProfile(getToken() as string)
+  profileStore.getProfile(getToken() as string).then(() => {
+    projectStore.updateProjectList(profileStore.token)
+  })
   onMounted(() => {
     drawerDirection.value = innerWidth <= 700 ? 'bottom' : 'right'
     // window.addEventListener('resize', handleResize)
@@ -175,6 +178,7 @@ export default function () {
 
   // 这里是数据处理暴露
   const {
+    projectData,
     chartData,
     chartOption
   } = projectAppDataState(chartDOM)
@@ -188,6 +192,7 @@ export default function () {
     draging,
     canvasTop,
     canvasLeft,
+    projectData,
     chartData,
     chartOption,
     handleNavChange,
