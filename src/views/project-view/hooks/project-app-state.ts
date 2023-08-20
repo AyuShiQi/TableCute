@@ -175,7 +175,6 @@ export default function () {
 
   // 这里是数据处理暴露
   const { 
-    chartProject,
     chartData,
     chartOption
   } = projectAppDataState(chartDOM)
@@ -189,7 +188,6 @@ export default function () {
     draging,
     canvasTop,
     canvasLeft,
-    chartProject,
     chartData,
     chartOption,
     handleNavChange,

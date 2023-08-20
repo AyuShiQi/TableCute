@@ -41,14 +41,16 @@
 import { ViToast } from 'viog-ui'
 
 import barCard from '../../../components/content/barCard.vue'
-import pieCard from '../../../components/content/pieCard.vue';
-import lineCard from '../../../components/content/lineCard.vue';
-import scatterCard from '../../../components/content/scatterCard.vue';
-// import projectCard from '../../../components/content/projectCard.vue';
+import pieCard from '../../../components/content/pieCard.vue'
+import lineCard from '../../../components/content/lineCard.vue'
+import scatterCard from '../../../components/content/scatterCard.vue'
+// import projectCard from '../../../components/content/projectCard.vue'
 
-import { createProj } from '@/network/tab'
+import { createProj, updateProj } from '@/network/tab'
+import { initProjectOption } from '@/global/project-option'
 
-import { useProjectStore, useProfileStore } from '@/store';
+import { useProjectStore, useProfileStore } from '@/store'
+
 const projectStore = useProjectStore()
 const profileStore = useProfileStore()
 
@@ -72,9 +74,10 @@ function createScatterCard () {
 }
 
 function createProject (type: number) {
-  createProj([], {}, type, profileStore.token).then(val => {
-    if (val.code === 200) projectStore.updateProjectList(profileStore.token)
-    else {
+  createProj([], initProjectOption(type), type, profileStore.token).then(val => {
+    if (val.code === 200) {
+      projectStore.updateProjectList(profileStore.token)
+    } else {
       alert('创建失败！')
     }
   })

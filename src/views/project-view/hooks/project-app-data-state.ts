@@ -13,12 +13,6 @@ export default function (chartDOM: Ref) {
   // ref
   // reactive
   /**
-   * 项目基础信息项
-   */
-  const chartProject = reactive({
-    title: undefined
-  })
-  /**
    * 图表数据
    */
   const chartData = reactive([
@@ -32,6 +26,7 @@ export default function (chartDOM: Ref) {
    * 图表配置项
    */
   const chartOption = reactive({
+    projectTitle: undefined,
     type: 0, // 条形图
     width: '600',
     height: '600',
@@ -165,7 +160,6 @@ export default function (chartDOM: Ref) {
   // provide
   // 生命周期
   return {
-    chartProject,
     chartData,
     chartOption
   }

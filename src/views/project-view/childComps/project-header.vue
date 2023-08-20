@@ -6,7 +6,7 @@
       type="button"
       class="project-name__input"
       placeholder="未命名项目"
-      v-model="project.title"></vi-input>
+      v-model="option.projectTitle"></vi-input>
     </div>
     <div class="project-header__option">
       <vi-button class="project-header__option-item">
@@ -24,7 +24,7 @@
   const emit = defineEmits(['update'])
 
   defineProps([
-    'project'
+    'option'
   ])
 
   function toUpdate () {

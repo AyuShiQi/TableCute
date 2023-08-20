@@ -1,7 +1,7 @@
 <template>
   <div class="project-view">
     <!-- 头部 -->
-    <project-header @update="updateCanvas" :project="chartProject"/>
+    <project-header @update="updateCanvas" :option="chartOption"/>
     <div class="project-view__content">
       <!-- 图表画布 -->
       <div
@@ -30,10 +30,10 @@
         <vi-table-editor v-model="chartData" v-show="navId === 0" class="project-view__content__drawer-item">
         </vi-table-editor>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 1">
-          <chart-controller :option="chartOption" :project="chartProject"/>
+          <chart-controller :option="chartOption"/>
         </vi-scroll>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 2">
-          <canvas-controller :option="chartOption" :project="chartProject"/>
+          <canvas-controller :option="chartOption"/>
         </vi-scroll>
       </vi-drawer>
     </div>
@@ -57,7 +57,6 @@
     projectSize,
     canvasTop,
     canvasLeft,
-    chartProject,
     // 数据部分
     chartData,
     chartOption,
