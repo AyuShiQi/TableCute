@@ -47,7 +47,7 @@ import scatterCard from '../../../components/content/scatterCard.vue'
 // import projectCard from '../../../components/content/projectCard.vue'
 
 import { createProj, updateProj } from '@/network/tab'
-import { initProjectOption } from '@/global/project-option'
+import { initProjectData, initProjectOption } from '@/global/project-option'
 
 import { useProjectStore, useProfileStore } from '@/store'
 
@@ -74,7 +74,7 @@ function createScatterCard () {
 }
 
 function createProject (type: number) {
-  createProj([], initProjectOption(type), type, profileStore.token).then(val => {
+  createProj(initProjectData(), initProjectOption(type), type, profileStore.token).then(val => {
     if (val.code === 200) {
       projectStore.updateProjectList(profileStore.token)
     } else {

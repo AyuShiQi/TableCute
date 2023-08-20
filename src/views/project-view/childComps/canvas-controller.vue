@@ -26,7 +26,7 @@
         <vi-input
         type="button"
         placeholder="未命名项目"
-        v-model="project.title">
+        v-model="option.projectTitle">
         </vi-input>
       </div>
     </vi-collapse>

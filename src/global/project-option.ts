@@ -67,3 +67,13 @@ export function initProjectOption (type: number) {
     }
   }
 }
+
+export function initProjectData () {
+  return [
+    ['类型', '数量'],
+    ['高中', 482.3],
+    ['学士', 568],
+    ['硕士', 573.8],
+    ['博士', 200]
+  ]
+}

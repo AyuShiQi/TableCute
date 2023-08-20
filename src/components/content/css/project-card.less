@@ -1,7 +1,7 @@
 .project-card {
     position: relative;
     width: 180px;
-    height: 190px;
+    // height: 190px;
     border-radius: var(--vi-card-radius);
     box-sizing: border-box;
 
@@ -64,9 +64,10 @@
         overflow: hidden;
         width: 100%;
         height: 140px;
-        margin-bottom: 8px;
+        // margin-bottom: 8px;
         background-color: var(--vi-background-color);
         border-radius: 5px;
+        // cursor: pointer;
 
         > img {
             width: 100%;
@@ -79,5 +80,49 @@
         .project-card__img-ok__option {
             opacity: 1;
         }  
+    }
+
+    .project-card__title-ok {
+        display: flex;
+        align-items: flex-end;
+        // margin-top: 8px;
+        .project-card__title-ok__icon {
+            width: 20px;
+
+            path {
+                fill: var(--vi-background-color-deepest)
+            }
+        }
+
+        .vi-input {
+            --vi-input-width: 7em;
+            --vi-input-inner-padding: 0;
+            padding: 0;
+
+            .vi-input-suffix.vi-input-fix {
+                border: none;
+            }
+
+            &::before {
+                opacity: 0;
+            }
+
+            .project-card__title-ok__icon {
+                opacity: 0;
+            }
+
+
+            &:hover {
+                .project-card__title-ok__icon {
+                    opacity: 1;
+                }
+            }
+        }
+    
+        .vi-input.is-focus {
+            .project-card__title-ok__icon {
+                opacity: 1;
+            }
+        }
     }
 }

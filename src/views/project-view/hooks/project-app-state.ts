@@ -153,9 +153,9 @@ export default function () {
   }
   // provide
   // 生命周期
+  profileStore.getProfile(getToken() as string)
   onMounted(() => {
     drawerDirection.value = innerWidth <= 700 ? 'bottom' : 'right'
-    profileStore.getProfile(getToken() as string)
     // window.addEventListener('resize', handleResize)
     window.addEventListener('mousemove', handleMousemove, { passive: false })
     window.addEventListener('touchmove', handleMousemove, { passive: false })
@@ -174,7 +174,7 @@ export default function () {
   })
 
   // 这里是数据处理暴露
-  const { 
+  const {
     chartData,
     chartOption
   } = projectAppDataState(chartDOM)
