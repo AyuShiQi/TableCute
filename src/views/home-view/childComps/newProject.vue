@@ -46,13 +46,16 @@ import lineCard from '../../../components/content/lineCard.vue'
 import scatterCard from '../../../components/content/scatterCard.vue'
 // import projectCard from '../../../components/content/projectCard.vue'
 
-import { createProj, updateProj } from '@/network/tab'
+import { useRouter } from 'vue-router'
+import { createProj } from '@/network/tab'
 import { initProjectData, initProjectOption } from '@/global/project-option'
 
 import { useProjectStore, useProfileStore } from '@/store'
+import qs from 'qs'
 
 const projectStore = useProjectStore()
 const profileStore = useProfileStore()
+const router = useRouter()
 
 function createBarProject () {
   createProject(0)
@@ -76,7 +79,22 @@ function createScatterCard () {
 function createProject (type: number) {
   createProj(initProjectData(), initProjectOption(type), type, profileStore.token).then(val => {
     if (val.code === 200) {
-      projectStore.updateProjectList(profileStore.token)
+      projectStore.updateProjectList(profileStore.token).then((val2: any) => {
+        // 寻找当前
+        for (const pro of projectStore.projectList.list) {
+          if (val.data === pro.id) {
+            router.push({
+              name: 'project',
+              path: '/project',
+              query: {
+                'project_id': pro.id,
+                info: qs.stringify(pro)
+              }
+            })
+            break
+          }
+        }
+      })
     } else {
       alert('创建失败！')
     }

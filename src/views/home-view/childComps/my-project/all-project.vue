@@ -20,11 +20,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue'
 import projectCard from '@/components/content/projectCard.vue'
-import { useProjectStore, useProfileStore } from '@/store';
+import { useProjectStore } from '@/store';
 const projectStore = useProjectStore()
-const profileStore = useProfileStore()
 </script>
 
 <style lang="less" scoped>

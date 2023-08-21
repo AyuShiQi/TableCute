@@ -37,13 +37,16 @@
           </template>
         </vi-input>
       </div>
+      <p class="project-card__desc-ok">
+        {{ showTime }}
+      </p>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
 import qs from 'qs'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { deleteProj, updateProj } from '@/network/tab'
 import { useProfileStore, useProjectStore } from '@/store'
 import { ViMessage } from 'viog-ui'
@@ -68,6 +71,11 @@ const props = defineProps({
 })
 
 const open = ref(false)
+
+const showTime = computed(() => {
+  const date = new Date(props.info.updateTime)
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
+})
 
 
 function handleDelete () {
