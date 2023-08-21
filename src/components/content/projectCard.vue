@@ -42,6 +42,7 @@
 </template>
 
 <script lang="ts" setup>
+import qs from 'qs'
 import { ref } from 'vue'
 import { deleteProj, updateProj } from '@/network/tab'
 import { useProfileStore, useProjectStore } from '@/store'
@@ -87,10 +88,13 @@ function handleChange () {
 }
 
 function handleCardClick () {
+  // console.log(props.info)
   router.push({
+    name: 'project',
     path: '/project',
     query: {
-      'project_id': props.info.id
+      'project_id': props.info.id,
+      info: qs.stringify(props.info)
     }
   })
 }

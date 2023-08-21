@@ -1,44 +1,54 @@
 // vue
-import { onMounted, onUpdated, reactive, watch } from 'vue'
+import { onMounted, onUpdated, reactive, shallowReactive, watch } from 'vue'
 // vue type
 import type { Ref } from 'vue'
 // 组件type
 // 外部hooks
 // 内部hooks
 // 外部模块
+import qs from 'qs'
 import { ViMessage } from 'viog-ui'
 import { useRouter } from 'vue-router'
 import { useProjectStore, useProfileStore } from '@/store'
-import { initProjectData, initProjectOption } from '@/global/project-option'
+import { initProjectData, initProjectOption, handleJsonStyle } from '@/global/project-option'
 import type { TuProject } from '@/network/interface/tab'
 
 export default function (chartDOM: Ref) {
   const projectStore = useProjectStore()
   const profileStore = useProfileStore()
   const router = useRouter()
-  const projectId = Number(router.currentRoute.value.query['project_id'])
-
+  // console.log(router.currentRoute.value)
+  const tempProject = qs.parse(router.currentRoute.value.query.info as string)
   // console.log(router.currentRoute)
   // 普通常量
   // DOM ref
   // ref
   // reactive
-  const projectData = reactive({} as Omit<TuProject, 'json1' | 'json2'>)
+  const projectData = reactive({
+    createTime: tempProject.createTime as string,
+    id: tempProject.id as unknown as number,
+    type: tempProject.type as unknown as number,
+    updateTime: tempProject.updateTime as string,
+    userId: tempProject.userId as unknown as number,
+  } as Omit<TuProject, 'json1' | 'json2'>)
+  console.log(JSON.parse(JSON.stringify(tempProject.json2)))
   /**
    * 图表数据
    */
-  const chartData = reactive(initProjectData())
+  const chartData = reactive(tempProject.json1 as any[])
   /**
    * 图表配置项
    */
-  const chartOption = reactive(initProjectOption(0))
+  const chartOption = reactive({
+    style: handleJsonStyle(tempProject.json2) as any
+  })
 
-  init()
   /**
    * 暂时处理图表变换bug，变化高度时若不进行控制处理可能会导致程序卡死
    */
   watch(chartOption, () => {
-    if (Number(chartOption.height) <= 10) chartOption.height = '10'
+    if (Number(chartOption.style.height) <= 10) chartOption.style.height = '10'
+    console.log(chartOption.style)
     if (chartDOM.value) chartDOM.value.render()
   }, { immediate: false })
   /**
@@ -50,7 +60,7 @@ export default function (chartDOM: Ref) {
       label: {
         content: originLabel
       }
-    } = chartOption
+    } = chartOption.style
     originData.length = 0
     originLabel.length = 0
     if (chartData[0]) {
@@ -77,62 +87,33 @@ export default function (chartDOM: Ref) {
     // console.log(originLabel)
   }, { immediate: true })
   
-  watch(projectStore.projectList, () => {
-    let flag = false
-    // console.log(projectStore.projectList.list)
-    for (const project of projectStore.projectList.list) {
-      if (project.id === projectId) {
-        projectData.id = projectId
-        projectData.updateTime = project.updateTime
-        projectData.createTime = project.createTime
-        projectData.url = project.url
-        projectData.userId = project.userId
-        // data
-        chartData.length = 0
-        chartData.push(...project.json1)
-        for (const name in project.json2) {
-          type ChartOption = typeof chartOption
-          const curName: keyof ChartOption = name as never
-          // 这个位置最大栈问题
-          // chartOption[curName] = project.json2[name] as never
-        }
-        flag = true
-        break
-      } 
-    }
+  // watch(projectStore.projectList, () => {
+  //   let flag = false
+  //   // console.log(projectStore.projectList.list)
+  //   for (const project of projectStore.projectList.list) {
+  //     if (project.id === projectId) {
+  //       projectData.id = projectId
+  //       projectData.updateTime = project.updateTime
+  //       projectData.createTime = project.createTime
+  //       projectData.url = project.url
+  //       projectData.userId = project.userId
+  //       // data
+  //       chartData.length = 0
+  //       chartData.push(...project.json1)
+  //       chartOption.style = project.json2
+  //       flag = true
+  //       break
+  //     } 
+  //   }
   
-    if (!flag) {
-      ViMessage.append('该项目不存在', 2000)
-      router.back()
-    }
-  })
+  //   if (!flag) {
+  //     ViMessage.append('该项目不存在', 2000)
+  //     router.back()
+  //   }
+  // }, { immediate: false })
   // 事件方法
   // 方法
   // 普通function函数
-  function init () {
-    let flag = false
-    // console.log(projectStore.projectList.list)
-    for (const project of projectStore.projectList.list) {
-      if (project.id === projectId) {
-        projectData.id = projectId
-        projectData.updateTime = project.updateTime
-        projectData.createTime = project.createTime
-        projectData.url = project.url
-        projectData.userId = project.userId
-        // data
-        chartData.length = 0
-        chartData.push(...project.json1)
-        // style
-        for (const name in project.json2) {
-          type ChartOption = typeof chartOption
-          const curName: keyof ChartOption = name as never
-          chartOption[curName] = project.json2[name] as never
-        }
-        flag = true
-        break
-      } 
-    }
-  }
   // provide
   // 生命周期
   return {

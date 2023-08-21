@@ -88,6 +88,7 @@ export default createRouter({
     // 制作中心
     {
       path: '/project',
+      name: 'project',
       component: projectView
     },
     {

@@ -21,6 +21,9 @@
         </vi-input>
       </div>
     </vi-collapse>
+    <vi-collapse title="画布颜色">
+      <vi-color-select v-model="option.background"></vi-color-select>
+    </vi-collapse>
     <vi-collapse title="项目名称">
       <div class="canvas-title-content">
         <vi-input

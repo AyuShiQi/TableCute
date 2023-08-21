@@ -20,34 +20,32 @@
 </template>
 
 <script lang="ts" setup>
-  import { time } from 'echarts';
 import { computed } from 'vue'
-  const emit = defineEmits(['update', 'save'])
+const emit = defineEmits(['update', 'save'])
 
-  const props = defineProps([
-    'option',
-    'project'
-  ])
+const props = defineProps([
+  'option',
+  'project'
+])
 
-  function toUpdate () {
-    emit('update')
+function toUpdate () {
+  emit('update')
+}
+
+function toSave () {
+  emit('save')
+}
+
+const nowTime = computed(() => {
+  const { updateTime, createTime } = props.project
+  const date = new Date(updateTime)
+  const time = `${date.getHours()} : ${date.getMinutes()}`
+  if (updateTime === createTime) {
+    return `创建于 ${time}`
+  } else {
+    return `已保存 ${time}`
   }
-
-  function toSave () {
-    emit('save')
-  }
-
-  const nowTime = computed(() => {
-    const { updateTime, createTime } = props.project
-    console.log(props.project)
-    const date = new Date(updateTime)
-    const time = `${date.getHours()} : ${date.getMinutes()}`
-    if (updateTime === createTime) {
-      return `创建于 ${time}`
-    } else {
-      return `已保存 ${time}`
-    }
-  })
+})
 </script>
 
 <style lang="less">

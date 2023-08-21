@@ -77,3 +77,26 @@ export function initProjectData () {
     ['博士', 200]
   ]
 }
+
+export function handleJsonStyle (style: any) {
+  style.attention.open = Boolean(style.attention.open)
+  style.attention.size = Number(style.attention.size)
+  style.axis.x.label = Boolean(style.axis.x.label)
+  style.axis.y.label = Boolean(style.axis.y.label)
+  style.axis.x.labelSize = Number(style.axis.x.labelSize)
+  style.axis.y.labelSize = Number(style.axis.y.labelSize)
+  style.info.sourceSize = Number(style.info.sourceSize)
+  style.info.unitSize = Number(style.info.unitSize)
+  style.label.open = Boolean(style.label.open)
+  style.label.size = Number(style.label.size)
+  style.padding.gap = Number(style.padding.gap)
+  style.padding.x = Number(style.padding.x)
+  style.padding.y = Number(style.padding.y)
+  style.title.size = Number(style.title.size)
+  style.type = Number(style.type)
+  style.unitGap = Number(style.unitGap)
+  style.width = Number(style.width)
+  style.height = Number(style.height)
+
+  return style
+}

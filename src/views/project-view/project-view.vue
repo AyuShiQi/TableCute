@@ -1,7 +1,7 @@
 <template>
   <div class="project-view">
     <!-- 头部 -->
-    <project-header @update="updateCanvas" :option="chartOption" :project="projectData"/>
+    <project-header @update="updateCanvas" :option="chartOption.style" :project="projectData"/>
     <div class="project-view__content">
       <!-- 图表画布 -->
       <div
@@ -13,7 +13,7 @@
       :style="{
         transform: `translate(${canvasLeft}px, ${canvasTop}px) scale(${projectSize}%)`
       }">
-        <amor-chart :option="chartOption" ref="chartDOM"></amor-chart>
+        <amor-chart :option="chartOption.style" ref="chartDOM"></amor-chart>
       </div>
       <!-- 画布比例放大器 -->
       <project-size-control v-model="projectSize"/>
@@ -30,10 +30,10 @@
         <vi-table-editor v-model="chartData" v-show="navId === 0" class="project-view__content__drawer-item">
         </vi-table-editor>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 1">
-          <chart-controller :option="chartOption"/>
+          <chart-controller :option="chartOption.style"/>
         </vi-scroll>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 2">
-          <canvas-controller :option="chartOption"/>
+          <canvas-controller :option="chartOption.style"/>
         </vi-scroll>
       </vi-drawer>
     </div>
