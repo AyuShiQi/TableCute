@@ -39,7 +39,7 @@ function toSave () {
 const nowTime = computed(() => {
   const { updateTime, createTime } = props.project
   const date = new Date(updateTime)
-  const time = `${date.getHours()} : ${date.getMinutes()}`
+  const time = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
   if (updateTime === createTime) {
     return `创建于 ${time}`
   } else {

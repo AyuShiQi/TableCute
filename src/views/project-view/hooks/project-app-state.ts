@@ -1,5 +1,5 @@
 // vue
-import { onMounted, ref, onBeforeUnmount, watch } from 'vue'
+import { onMounted, ref, onBeforeUnmount } from 'vue'
 // vue type
 // 组件type
 // 外部hooks
@@ -22,6 +22,7 @@ export default function () {
   /**
    * amorChart DOM
    */
+  const canvasDOM = ref()
   const chartDOM = ref()
   // ref
   /**
@@ -53,6 +54,7 @@ export default function () {
    */
   const canvasLeft = ref(80)
   // reactive
+  // 这里是数据处理暴露
   // inject
   // computed
   // watch
@@ -131,27 +133,28 @@ export default function () {
   /**
    * 下载图表
    */
-  function updateCanvas () {
-    const canvas = chartDOM.value.el.children[0]
-    var link = document.createElement("a");
-    var imgData = canvas.toDataURL();
-    var strDataURI = imgData.substr(22, imgData.length);
-    var blob = dataURLtoBlob(imgData);
-    var objurl = URL.createObjectURL(blob);
-    link.download = "tablecute-test.png";
-    link.href = objurl;
-    link.click();
+  function saveCanvas () {
+    const canvas = canvasDOM.value.children[0]
+    var link = document.createElement("a")
+    var imgData = canvas.toDataURL()
+    // var strDataURI = imgData.substr(22, imgData.length);
+    var blob = dataURLtoBlob(imgData)
+    var objurl = URL.createObjectURL(blob)
+    link.download = `${chartOption.style.projectTitle ?? '未命名文件'}.png`
+    link.href = objurl
+    link.click()
     
  	  function  dataURLtoBlob(dataurl: string) {
     	var arr = dataurl.split(',')
       var mime = (arr as any)[0].match(/:(.*?);/)[1],
-      	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n)
     	while(n--){
-     		 u8arr[n] = bstr.charCodeAt(n);
+     		 u8arr[n] = bstr.charCodeAt(n)
     	}
-    	return new Blob([u8arr], {type:mime});
+    	return new Blob([u8arr], {type:mime})
   	}
   }
+
   // provide
   // 生命周期
   profileStore.getProfile(getToken() as string).then(() => {
@@ -176,14 +179,16 @@ export default function () {
     window.removeEventListener('mouseleave', handleMouseup)
   })
 
-  // 这里是数据处理暴露
   const {
+    isUpdating,
     projectData,
     chartData,
-    chartOption
+    chartOption,
+    updateCanvas
   } = projectAppDataState(chartDOM)
 
   return {
+    canvasDOM,
     chartDOM,
     drawerOpen,
     drawerDirection,
@@ -192,12 +197,14 @@ export default function () {
     draging,
     canvasTop,
     canvasLeft,
+    isUpdating,
     projectData,
     chartData,
     chartOption,
     handleNavChange,
     handleContentMousedown,
     handleContentWheel,
-    updateCanvas
+    updateCanvas,
+    saveCanvas
   }
 }

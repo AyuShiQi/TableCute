@@ -33,13 +33,19 @@
         </vi-input>
       </div>
     </vi-collapse>
-    <vi-collapse title="项目属性"></vi-collapse>
-    <vi-collapse title="修改列表"></vi-collapse>
+    <vi-collapse title="项目属性">
+      <vi-form-item label="创建时间">
+        {{ project.createTime }}
+      </vi-form-item>
+      <vi-form-item label="更新时间">
+        {{ project.updateTime }}
+      </vi-form-item>
+    </vi-collapse>
   </vi-collapse-group>
 </template>
 
 <script lang="ts" setup>
-defineProps([
+const props = defineProps([
   'option',
   'project'
 ])

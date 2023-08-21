@@ -17,7 +17,9 @@ export function initProjectOption (type: number) {
       y: 8,
       gap: 8
     },
-    data: [] as (number | string)[][],
+    data: [
+      ['']
+    ] as (number | string)[][],
     title: {
       content: '这里是标题',
       size: 32,
@@ -59,7 +61,9 @@ export function initProjectOption (type: number) {
     },
     label: {
       open: true,
-      content: [] as any[],
+      content: [
+        ['']
+      ] as any[],
       color: '#aaa',
       size: 11,
       align: 'top',

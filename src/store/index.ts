@@ -92,18 +92,21 @@ export const useProjectStore = defineStore('project', () => {
    * @param token 用户token
    */
   function updateProjectList (token: string) {
-    getProj(token).then((val) => {
-      if (val.code === 200) {
-        isUpdating.value = false
-        projectList.list = val.data
-        projectList.total = val.data.length
-      } else if (val.message === '查询失败') {
-        isUpdating.value = false
-        projectList.list = []
-        projectList.total = 0
-      } else {
-        ViMessage.append('用户信息登录过期！')
-      }
+    return new Promise((res) => {
+      getProj(token).then((val) => {
+        if (val.code === 200) {
+          isUpdating.value = false
+          projectList.list = val.data
+          projectList.total = val.data.length
+        } else if (val.message === '查询失败') {
+          isUpdating.value = false
+          projectList.list = []
+          projectList.total = 0
+        } else {
+          ViMessage.append('用户信息登录过期！')
+        }
+        res(val)
+      })
     })
   }
 
@@ -114,10 +117,31 @@ export const useProjectStore = defineStore('project', () => {
     }).slice(0, 5)
   })
 
+  const chartList = computed(() => {
+    const nowList = []
+    for (const project of projectList.list) {
+      if (project.id !== 999) {
+        nowList.push(project)
+      }
+    }
+    return nowList
+  })
+
+  const tableList = computed(() => {
+    const nowList = []
+    for (const project of projectList.list) {
+      if (project.id === 999) {
+        nowList.push(project)
+      }
+    }
+    return nowList
+  })
 
   return {
     projectList,
     latestList,
+    chartList,
+    tableList,
     updateProjectList
   }
 })

@@ -1,7 +1,14 @@
 <template>
   <div class="project-view">
+    <!-- 遮罩层 -->
+    <div class="project-view__update-mask" v-if="isUpdating">
+      <div class="project-view__update-mask__content">
+        <vi-loading></vi-loading>
+        <p>保存中</p>
+      </div>
+    </div>
     <!-- 头部 -->
-    <project-header @update="updateCanvas" :option="chartOption.style" :project="projectData"/>
+    <project-header @update="updateCanvas" @save="saveCanvas" :option="chartOption.style" :project="projectData"/>
     <div class="project-view__content">
       <!-- 图表画布 -->
       <div
@@ -9,7 +16,7 @@
       @wheel="handleContentWheel"
       @mousedown="handleContentMousedown"
       @touchstart="handleContentMousedown"
-      ref="e"
+      ref="canvasDOM"
       :style="{
         transform: `translate(${canvasLeft}px, ${canvasTop}px) scale(${projectSize}%)`
       }">
@@ -33,7 +40,7 @@
           <chart-controller :option="chartOption.style"/>
         </vi-scroll>
         <vi-scroll class="project-view__content__drawer-item" hidden v-show="navId === 2">
-          <canvas-controller :option="chartOption.style"/>
+          <canvas-controller :option="chartOption.style" :project="projectData"/>
         </vi-scroll>
       </vi-drawer>
     </div>
@@ -50,6 +57,7 @@
   import projectAppState from './hooks/project-app-state'
 
   const {
+    canvasDOM,
     chartDOM,
     drawerOpen,
     drawerDirection,
@@ -58,6 +66,7 @@
     canvasTop,
     canvasLeft,
     // 数据部分
+    isUpdating,
     projectData,
     chartData,
     chartOption,
@@ -65,17 +74,44 @@
     handleNavChange,
     handleContentMousedown,
     handleContentWheel,
-    updateCanvas
+    updateCanvas,
+    saveCanvas
   } = projectAppState()
 </script>
 
 <style lang="less" scoped>
 .project-view {
+  position: relative;
   display: flex;
   width: 100%;
   height: 100vh;
   background-color: var(--vi-background-color);
   flex-direction: column;
+
+  .project-view__update-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000099;
+    backdrop-filter: blur(3px);
+
+    .project-view__update-mask__content {
+      position: relative;
+      display: flex;
+      top: 36%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+      > p {
+        color: var(--vi-background-color-deep);
+      }
+    }
+  }
   .project-view__content {
     position: relative;
     overflow: hidden;

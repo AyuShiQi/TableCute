@@ -8,12 +8,15 @@
   </div>
   <h6>所有项目</h6>
   <div class="not-found-img" v-if="projectStore.projectList.total === 0">
-      <img src="../img/notfound.png">
-    </div>
+    <img src="../img/notfound.png">
+  </div>
   <div class="my-project-all-project">
     <project-card v-for="pro in projectStore.projectList.list" :info="pro"></project-card>
   </div>
   <h6>回收站</h6>
+  <div class="not-found-img">
+    <img src="../img/notfound.png">
+  </div>
 </template>
 
 <script lang="ts" setup>

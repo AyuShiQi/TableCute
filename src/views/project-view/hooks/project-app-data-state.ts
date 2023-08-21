@@ -1,5 +1,5 @@
 // vue
-import { onMounted, onUpdated, reactive, shallowReactive, watch } from 'vue'
+import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue'
 // vue type
 import type { Ref } from 'vue'
 // 组件type
@@ -10,7 +10,8 @@ import qs from 'qs'
 import { ViMessage } from 'viog-ui'
 import { useRouter } from 'vue-router'
 import { useProjectStore, useProfileStore } from '@/store'
-import { initProjectData, initProjectOption, handleJsonStyle } from '@/global/project-option'
+import { handleJsonStyle } from '@/global/project-option'
+import { updateProj } from '@/network/tab'
 import type { TuProject } from '@/network/interface/tab'
 
 export default function (chartDOM: Ref) {
@@ -23,6 +24,7 @@ export default function (chartDOM: Ref) {
   // 普通常量
   // DOM ref
   // ref
+  const isUpdating = ref(false)
   // reactive
   const projectData = reactive({
     createTime: tempProject.createTime as string,
@@ -31,7 +33,7 @@ export default function (chartDOM: Ref) {
     updateTime: tempProject.updateTime as string,
     userId: tempProject.userId as unknown as number,
   } as Omit<TuProject, 'json1' | 'json2'>)
-  console.log(JSON.parse(JSON.stringify(tempProject.json2)))
+  // console.log(JSON.parse(JSON.stringify(tempProject.json2)))
   /**
    * 图表数据
    */
@@ -48,7 +50,7 @@ export default function (chartDOM: Ref) {
    */
   watch(chartOption, () => {
     if (Number(chartOption.style.height) <= 10) chartOption.style.height = '10'
-    console.log(chartOption.style)
+    // console.log(chartOption.style)
     if (chartDOM.value) chartDOM.value.render()
   }, { immediate: false })
   /**
@@ -61,6 +63,7 @@ export default function (chartDOM: Ref) {
         content: originLabel
       }
     } = chartOption.style
+    console.log(chartOption.style)
     originData.length = 0
     originLabel.length = 0
     if (chartData[0]) {
@@ -112,13 +115,67 @@ export default function (chartDOM: Ref) {
   //   }
   // }, { immediate: false })
   // 事件方法
+  function updateCanvas () {
+    isUpdating.value = true
+    updateProj(projectData.id, chartData, chartOption.style, profileStore.token).then(val => {
+      if (val.code === 200) {
+        projectStore.updateProjectList(profileStore.token).then(val => {
+          isUpdating.value = false
+          ViMessage.append('保存成功！', 2000)
+          router.replace({
+            path: '/project',
+            query: {
+              'project_id': projectData.id,
+              info: qs.stringify({
+                json1: chartData,
+                json2: chartOption.style,
+                ...projectData
+              })
+            }
+          })
+        })
+      }
+    })
+  }
   // 方法
+  function unloadUpdate (e: Event) {
+    e.preventDefault()
+    updateProj(projectData.id, chartData, chartOption.style, profileStore.token).then(val => {
+      if (val.code === 200) {
+        projectStore.updateProjectList(profileStore.token).then(val => {
+          isUpdating.value = false
+          ViMessage.append('自动为您保存', 2000)
+          router.replace({
+            path: '/project',
+            query: {
+              'project_id': projectData.id,
+              info: qs.stringify({
+                json1: chartData,
+                json2: chartOption.style,
+                ...projectData
+              })
+            }
+          })
+        })
+      }
+    })
+    return ""
+  }
   // 普通function函数
   // provide
   // 生命周期
+  onMounted(() => {
+    window.addEventListener('beforeunload', unloadUpdate)
+  })
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('beforeunload', unloadUpdate)
+  })
   return {
+    isUpdating,
     projectData,
     chartData,
-    chartOption
+    chartOption,
+    updateCanvas
   }
 }
