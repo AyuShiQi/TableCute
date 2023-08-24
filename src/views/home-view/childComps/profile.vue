@@ -174,7 +174,7 @@ import {
   smscodeRules,
   telephoneRules,
   emailRules
-} from '@/regs/user';
+} from '@/regs/user'
 import profileState from './hooks/profile-state'
 
 const {

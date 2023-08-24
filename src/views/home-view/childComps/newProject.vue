@@ -6,6 +6,7 @@
       <pieCard @click="createPieProject"></pieCard>
       <lineCard @click="createLineProject"></lineCard>
       <scatterCard @click="createScatterCard"></scatterCard>
+      <tableCard @click="createTableCard"></tableCard>
     </div>
   </vi-scroll>
   <h6>模板搜索</h6>
@@ -44,6 +45,7 @@ import barCard from '../../../components/content/barCard.vue'
 import pieCard from '../../../components/content/pieCard.vue'
 import lineCard from '../../../components/content/lineCard.vue'
 import scatterCard from '../../../components/content/scatterCard.vue'
+import tableCard from '../../../components/content/tableCard.vue'
 // import projectCard from '../../../components/content/projectCard.vue'
 
 import { useRouter } from 'vue-router'
@@ -62,18 +64,25 @@ function createBarProject () {
 }
 
 function createPieProject () {
-  // createProject(1)
-  ViToast.open('暂未开放，敬请期待', 200)
+  createProject(2)
+  // ViToast.open('暂未开放，敬请期待', 200)
 }
 
 function createLineProject () {
-  // createProject(2)
-  ViToast.open('暂未开放，敬请期待', 200)
+  createProject(1)
+  // ViToast.open('暂未开放，敬请期待', 200)
 }
 
 function createScatterCard () {
   // createProject(3)
   ViToast.open('暂未开放，敬请期待', 200)
+}
+
+function createTableCard () {
+  console.log('ok')
+  router.push({
+    path: '/table'
+  })
 }
 
 function createProject (type: number) {
