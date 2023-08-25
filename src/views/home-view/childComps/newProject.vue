@@ -79,22 +79,19 @@ function createScatterCard () {
 }
 
 function createTableCard () {
-  console.log('ok')
-  router.push({
-    path: '/table'
-  })
+  createProject(999)
 }
 
-function createProject (type: number) {
-  createProj(initProjectData(), initProjectOption(type), type, profileStore.token).then(val => {
+function createProject (type: number, path: 'table' | 'project' = 'project') {
+  createProj(initProjectData(), type === 999? null : initProjectOption(type), type, profileStore.token).then(val => {
     if (val.code === 200) {
-      projectStore.updateProjectList(profileStore.token).then((val2: any) => {
+      projectStore.updateProjectList(profileStore.token).then(() => {
         // 寻找当前
         for (const pro of projectStore.projectList.list) {
           if (val.data === pro.id) {
             router.push({
-              name: 'project',
-              path: '/project',
+              name: path,
+              path: `/${path}`,
               query: {
                 'project_id': pro.id,
                 info: qs.stringify(pro)
